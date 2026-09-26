@@ -484,11 +484,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
               <Link to="/" onClick={handleNavClick} className="inline-flex items-center gap-4 sm:gap-4.5 md:gap-5 group">
-                <div className="w-12 h-12 sm:w-13 sm:h-13 md:w-14 md:h-14 shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                   <img 
                     src="/images/logo.png" 
                     alt="Xenians Group Emblem" 
-                    className="w-full h-full object-contain brightness-110 transition-opacity group-hover:opacity-90"
+                    className="w-full h-full object-contain"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "/images/로고.png";
                     }}
@@ -498,7 +498,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   <img 
                     src="/images/로고3.png" 
                     alt="XENIANS GROUP" 
-                    className="h-9 sm:h-10 md:h-11 w-auto object-contain shrink-0 transition-opacity group-hover:opacity-90"
+                    className="h-8 sm:h-9 md:h-10 w-auto object-contain shrink-0"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "/images/xenians-logo.png";
                     }}

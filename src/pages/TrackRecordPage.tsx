@@ -14,6 +14,7 @@ export const TrackRecordPage: React.FC = () => {
   const { data, lang } = useContent();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [selectedModalProject, setSelectedModalProject] = useState<DetailedProject | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const projects: DetailedProject[] = (data.detailedProjects && data.detailedProjects.length > 0)
     ? data.detailedProjects
@@ -139,10 +140,10 @@ export const TrackRecordPage: React.FC = () => {
             {/* Left Column: Numbered Project List & Section Overview */}
             <div className="lg:col-span-3 pr-0 lg:pr-3">
               <div className="mb-4 pb-3.5 border-b border-black/[0.08] flex items-center justify-between">
-                <span className="text-[11px] font-mono tracking-[0.25em] text-[#c6a35b] font-bold uppercase">
+                <span className="text-[11px] font-mono tracking-[0.25em] text-[#1e40af] font-bold uppercase">
                   {listTitle}
                 </span>
-                <span className="text-[11px] font-mono text-[#888888] font-semibold">
+                <span className="text-[11px] font-mono text-[#666666] font-semibold">
                   {String(projects.length).padStart(2, '0')} {isKo ? 'PROJECTS' : 'PROJECTS'}
                 </span>
               </div>
@@ -156,55 +157,61 @@ export const TrackRecordPage: React.FC = () => {
                 </div>
               )}
 
-              <div className="flex flex-col space-y-1 max-h-[540px] overflow-y-auto pr-1.5">
+              <div 
+                className="flex flex-col space-y-2 max-h-[560px] overflow-y-auto pr-1.5 custom-scrollbar"
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
                 {projects.map((p, idx) => {
                   const isActive = idx === validIndex;
+                  const isHovered = hoveredIndex === idx;
+                  const isDimmed = hoveredIndex !== null && !isHovered;
                   const displayNum = p.num || String(idx + 1).padStart(2, '0');
                   const displayName = getProjectTitle(p);
+
                   return (
                     <button
                       key={p.id || idx}
+                      onMouseEnter={() => setHoveredIndex(idx)}
                       onClick={() => setCurrentIndex(idx)}
-                      className={`group relative cursor-pointer w-full text-left py-3 px-3.5 rounded-md transition-all duration-300 flex items-center justify-between hover:translate-x-1.5 ${
-                        isActive
-                          ? 'bg-black/[0.04] text-[#141413]'
-                          : 'text-[#444444] hover:bg-black/[0.025] hover:text-[#141413]'
+                      className={`group cursor-pointer relative w-full text-left py-3 px-3.5 rounded-xs transition-all duration-300 flex items-center justify-between border-t-0 border-r-0 border-l-[3px] border-b-[2px] overflow-hidden ${
+                        isDimmed
+                          ? 'opacity-30 blur-[0.6px] scale-[0.985] bg-transparent border-l-transparent border-b-transparent'
+                          : isHovered || isActive
+                            ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-4px_6px_20px_rgba(198,163,91,0.22),0_8px_20px_rgba(0,0,0,0.05)] font-bold -translate-y-1 translate-x-1.5 z-10'
+                            : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-1 hover:translate-x-1.5 hover:shadow-[-4px_6px_20px_rgba(198,163,91,0.22)]'
                       }`}
                     >
-                      {/* Active / Hover Dynamic Gold Indicator Bar */}
-                      <span 
-                        className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full transition-all duration-300 ${
-                          isActive 
-                            ? 'h-6 bg-[#c6a35b]' 
-                            : 'h-0 bg-[#c6a35b] group-hover:h-4'
-                        }`} 
-                      />
+                      {/* Subtle Gold Shimmer Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-[#c6a35b]/[0.10] via-transparent to-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                      <div className="flex items-center gap-3 pl-1.5 truncate">
+                      <div className="flex items-center gap-3 pl-1 truncate relative z-10">
                         <span
-                          className={`font-mono text-[12px] font-bold transition-colors duration-300 shrink-0 ${
-                            isActive ? 'text-[#c6a35b]' : 'text-[#888888] group-hover:text-[#c6a35b]'
+                          className={`font-mono text-[12px] font-bold transition-colors duration-200 shrink-0 ${
+                            isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
                           }`}
                         >
                           {displayNum}
                         </span>
                         <span
-                          className={`font-sans text-[14px] sm:text-[14.5px] transition-all duration-300 truncate ${
-                            isActive
-                              ? 'font-bold text-[#141413]'
-                              : 'font-medium text-[#444444] group-hover:text-[#141413] group-hover:font-semibold'
+                          className={`font-sans text-[13.5px] sm:text-[14px] transition-all duration-200 truncate ${
+                            isActive || isHovered
+                              ? 'font-bold text-[#111111]'
+                              : 'font-medium text-[#333333] group-hover:text-[#111111] group-hover:font-semibold'
                           }`}
                         >
                           {displayName}
                         </span>
                       </div>
-                      <span 
-                        className={`w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300 ${
-                          isActive 
-                            ? 'bg-[#c6a35b] scale-125' 
-                            : 'bg-transparent group-hover:bg-[#c6a35b]/60'
-                        }`} 
-                      />
+                      
+                      <div className="relative z-10 flex items-center pl-2 shrink-0">
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isActive || isHovered
+                            ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-xs scale-110' 
+                            : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-110'
+                        }`}>
+                          <ChevronRight className="w-3 h-3" />
+                        </div>
+                      </div>
                     </button>
                   );
                 })}

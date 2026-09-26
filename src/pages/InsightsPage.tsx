@@ -8,6 +8,7 @@ import { PageHeader } from '../components/PageHeader';
 export const InsightsPage: React.FC = () => {
   const { lang } = useContent();
   const [activeTag, setActiveTag] = useState('ALL');
+  const [hoveredTag, setHoveredTag] = useState<string | null>(null);
 
   const articles = [
     {
@@ -62,20 +63,32 @@ export const InsightsPage: React.FC = () => {
 
       {/* Filter Tabs */}
       <div className="sticky top-20 md:top-24 z-40 bg-white/95 backdrop-blur-md border-b border-black/[0.06] px-4 md:px-[6vw] shadow-2xs">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-center gap-2 md:gap-3 overflow-x-auto py-3.5 no-scrollbar">
-          {tags.map((t) => (
-            <button
-              key={t}
-              onClick={() => setActiveTag(t)}
-              className={`cursor-pointer px-5 py-2 rounded-full transition-all duration-300 shrink-0 text-[11px] md:text-[12px] font-mono tracking-wider font-semibold ${
-                activeTag === t
-                  ? 'bg-[#141413] text-white shadow-md'
-                  : 'bg-[#faf8f5] text-[#444444] hover:text-black hover:bg-[#f0ebe1] border border-black/[0.06]'
-              }`}
-            >
-              {t}
-            </button>
-          ))}
+        <div 
+          className="max-w-[1400px] mx-auto flex items-center justify-center gap-2 md:gap-3 overflow-x-auto py-3.5 no-scrollbar"
+          onMouseLeave={() => setHoveredTag(null)}
+        >
+          {tags.map((t) => {
+            const isActive = activeTag === t;
+            const isHovered = hoveredTag === t;
+            const isDimmed = hoveredTag !== null && !isHovered;
+
+            return (
+              <button
+                key={t}
+                onMouseEnter={() => setHoveredTag(t)}
+                onClick={() => setActiveTag(t)}
+                className={`cursor-pointer px-4.5 py-1.5 rounded-xs transition-all duration-300 shrink-0 text-[11px] md:text-[12px] font-mono tracking-wider font-semibold border-t-0 border-r-0 border-l-[3px] border-b-[2px] ${
+                  isDimmed
+                    ? 'opacity-30 blur-[0.6px] scale-[0.98] bg-transparent border-l-transparent border-b-transparent'
+                    : isHovered || isActive
+                      ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-3px_5px_15px_rgba(198,163,91,0.22)] -translate-y-0.5 translate-x-1 z-10'
+                      : 'bg-transparent text-[#555555] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-0.5 hover:translate-x-1 hover:shadow-[-3px_5px_15px_rgba(198,163,91,0.22)]'
+                }`}
+              >
+                {t}
+              </button>
+            );
+          })}
         </div>
       </div>
 

@@ -17,6 +17,7 @@ import {
 export const CompanyPage: React.FC = () => {
   const { data, lang } = useContent();
   const [activeTab, setActiveTab] = useState<'ceo' | 'org' | 'overview'>('ceo');
+  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
   const isKo = lang === 'ko';
   const ceoMsg = data.company.ceoMessage;
@@ -119,24 +120,31 @@ Thank you.`;
           {/* Left Vertical Sidebar / Table of Contents (Unboxed, Direct on Background with Refined Hover Animation) */}
           <div className="lg:col-span-3 lg:sticky lg:top-32 pr-0 lg:pr-4">
             <div className="mb-6 pb-4 border-b border-black/[0.08] flex items-center justify-between">
-              <span className="text-[11px] font-mono tracking-[0.25em] text-[#c6a35b] font-bold uppercase">
+              <span className="text-[11px] font-mono tracking-[0.25em] text-[#1e40af] font-bold uppercase">
                 {isKo ? '제니안스 소개' : 'ABOUT XENIANS'}
               </span>
-              <span className="text-[11px] font-mono text-[#888888] font-semibold">
+              <span className="text-[11px] font-mono text-[#666666] font-semibold">
                 {isKo ? '03개 섹션' : '03 SECTIONS'}
               </span>
             </div>
             
-            <nav className="space-y-1.5">
+            <nav 
+              className="flex flex-col gap-2"
+              onMouseLeave={() => setHoveredMenu(null)}
+            >
               {[
                 { id: 'ceo', label: 'CEO MESSAGE', labelKo: 'CEO 메시지' },
                 { id: 'org', label: 'ORGANIZATION', labelKo: '조직도' },
                 { id: 'overview', label: 'OUR STRENGTH', labelKo: '핵심 역량' },
               ].map((item, idx) => {
                 const isActive = activeTab === item.id;
+                const isHovered = hoveredMenu === item.id;
+                const isDimmed = hoveredMenu !== null && !isHovered;
+
                 return (
                   <button
                     key={item.id}
+                    onMouseEnter={() => setHoveredMenu(item.id)}
                     onClick={() => {
                       setActiveTab(item.id as any);
                       const el = document.getElementById(item.id);
@@ -144,47 +152,45 @@ Thank you.`;
                         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
-                    className={`group relative cursor-pointer w-full text-left py-3.5 px-4 rounded-md transition-all duration-300 flex items-center justify-between hover:translate-x-2 border border-transparent ${
-                      isActive
-                        ? 'bg-white text-[#141413] shadow-[0_4px_16px_rgba(198,163,91,0.14)] border-[#c6a35b]/40'
-                        : 'text-[#444444] hover:bg-white hover:text-[#141413] hover:shadow-xs hover:border-black/[0.06]'
+                    className={`group cursor-pointer relative w-full text-left py-3.5 px-4 rounded-xs transition-all duration-300 flex items-center justify-between border-t-0 border-r-0 border-l-[3px] border-b-[2.5px] overflow-hidden ${
+                      isDimmed 
+                        ? 'opacity-30 blur-[0.6px] scale-[0.985] bg-transparent border-l-transparent border-b-transparent' 
+                        : isHovered || isActive
+                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-4px_8px_22px_rgba(198,163,91,0.25),0_10px_24px_rgba(0,0,0,0.06)] font-bold -translate-y-1 translate-x-1.5 z-10'
+                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-1 hover:translate-x-1.5 hover:shadow-[-4px_8px_22px_rgba(198,163,91,0.25)]'
                     }`}
                   >
-                    {/* Active / Hover Dynamic Gold Indicator Bar */}
-                    <span 
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[4px] rounded-full transition-all duration-300 ${
-                        isActive 
-                          ? 'h-8 bg-[#c6a35b] shadow-xs' 
-                          : 'h-0 bg-[#c6a35b] group-hover:h-6'
-                      }`} 
-                    />
+                    {/* Subtle Gold Shimmer Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#c6a35b]/[0.12] via-transparent to-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                    <div className="flex items-center gap-3 pl-2">
+                    <div className="flex items-center gap-3.5 min-w-0 relative z-10 pl-1">
                       <span
-                        className={`font-mono text-[12px] font-bold transition-colors duration-300 ${
-                          isActive ? 'text-[#c6a35b]' : 'text-[#888888] group-hover:text-[#c6a35b]'
+                        className={`font-mono text-[12.5px] font-bold shrink-0 transition-colors duration-200 ${
+                          isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
                         }`}
                       >
                         0{idx + 1}
                       </span>
                       <span
-                        className={`font-sans text-[15px] sm:text-[15.5px] transition-all duration-300 ${
-                          isActive
-                            ? 'font-bold text-[#141413]'
-                            : 'font-medium text-[#444444] group-hover:text-[#141413] group-hover:font-semibold'
+                        className={`font-sans text-[14.5px] sm:text-[15px] tracking-tight truncate transition-colors duration-200 ${
+                          isActive || isHovered
+                            ? 'font-bold text-[#111111]'
+                            : 'font-medium text-[#333333] group-hover:text-[#111111] group-hover:font-bold'
                         }`}
                       >
                         {lang === 'ko' ? item.labelKo : item.label}
                       </span>
                     </div>
 
-                    <ChevronRight
-                      className={`w-4 h-4 transition-all duration-300 shrink-0 ${
-                        isActive
-                          ? 'text-[#c6a35b] translate-x-1 opacity-100'
-                          : 'text-[#c6a35b] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-1'
-                      }`}
-                    />
+                    <div className="relative z-10 flex items-center pl-2 shrink-0">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isActive || isHovered
+                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-xs translate-x-0.5 scale-110' 
+                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-110 group-hover:translate-x-0.5'
+                      }`}>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
                   </button>
                 );
               })}
@@ -199,9 +205,25 @@ Thank you.`;
           {/* Right Main Content */}
           <div className="lg:col-span-9 space-y-16 sm:space-y-20">
             
-            {/* CEO MESSAGE SECTION (Unboxed, Sitting Directly on Page Background) */}
-            <div id="ceo" className="pb-16 border-b border-black/[0.08] scroll-mt-32">
-              <div className="max-w-3xl">
+            {/* CEO MESSAGE SECTION (Unboxed, Sitting Directly on Page Background with Centered Watermark Emblem) */}
+            <div id="ceo" className="relative pb-16 border-b border-black/[0.08] scroll-mt-32 overflow-hidden">
+              
+              <div className="relative z-10 max-w-3xl">
+                {/* Centered Watermark Logo Emblem directly behind CEO message text */}
+                <div 
+                  aria-hidden="true"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[440px] md:w-[520px] h-[320px] sm:h-[440px] md:h-[520px] pointer-events-none select-none opacity-[0.055] -z-10"
+                >
+                  <img 
+                    src="/images/logo.png" 
+                    alt="" 
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "/images/로고.png";
+                    }}
+                  />
+                </div>
+
                 <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#c6a35b] font-bold uppercase block mb-3">
                   CEO MESSAGE
                 </span>
