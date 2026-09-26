@@ -81,10 +81,20 @@ function mergeSiteData(defaults: SiteData, savedRaw: string | null): SiteData {
       ? defaults.detailedProjects
       : DEFAULT_DETAILED_PROJECTS;
 
-    // Preserve all customized detailedProjects directly as edited by the user
-    const projects = (saved.detailedProjects && saved.detailedProjects.length > 0)
-      ? saved.detailedProjects
-      : defaultsProjects;
+    // Preserve all customized detailedProjects directly as edited by the user,
+    // but automatically pick up brand-new projects added in code (by id) even if
+    // the visitor's browser has an older cached copy in localStorage that predates them.
+    const projects = (() => {
+      const savedProjects = saved.detailedProjects;
+      if (!savedProjects || savedProjects.length === 0) return defaultsProjects;
+
+      const savedIds = new Set(savedProjects.map((p: any) => p?.id));
+      const newFromCode = defaultsProjects.filter((p: any) => !savedIds.has(p?.id));
+
+      // New code-side projects are appended after saved ones. If you need them in a
+      // specific position, adjust the order here or clear localStorage on next deploy.
+      return newFromCode.length > 0 ? [...savedProjects, ...newFromCode] : savedProjects;
+    })();
 
     return {
       ...defaults,
