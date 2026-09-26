@@ -1,0 +1,8 @@
+{
+  "name": "XENIANS | Real Estate Business Platform",
+  "description": "XENIANS Group is an integrated real estate platform connecting M&A Deal Advisory, Development & PM, Strategic Presales, Hospitality Operation, and Smart Facility Management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

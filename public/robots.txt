@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /login
+
+Sitemap: https://xenians.co.kr/sitemap.xml
+
+#DaumWebMasterTool:412550ddc0ca29fd61c18b77463f5bd18ec9f58daddd660ca35bd620bb71f1de:QDq184p8sAb2VmnvvhkI3w==

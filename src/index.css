@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", "Noto Serif KR", "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Outfit", "Plus Jakarta Sans", "Pretendard", sans-serif;
+
+  --color-primary: var(--app-primary, #ffffff);
+  --color-secondary: var(--app-secondary, #c6a35b); /* Gold */
+  --color-accent: #f7f5f0; /* Soft architectural light beige */
+  --color-charlie: var(--app-charlie, #141413); /* Charcoal text */
+  --color-ivory: #f7f5f0; /* Refined neutral light beige without pink tint */
+  --color-royal: #0a192f;
+  --color-gold: #c6a35b;
+  --color-gold-dark: #a18750;
+  --color-gold-light: #dfbe7a;
+}
+
+@layer base {
+  html {
+    font-family: "Pretendard", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.015em;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#f7f5f0] text-[#141413] font-sans overflow-x-hidden;
+    letter-spacing: -0.015em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    word-break: keep-all;
+  }
+
+  p, span, li, a, button, input, textarea {
+    word-break: keep-all;
+    font-feature-settings: "tnum";
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 30s linear infinite;
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(0%); }
+    to { transform: translateY(-50%); }
+  }
+
+  .animate-gold-pulse {
+    animation: pulse-gold 3s infinite alternate;
+  }
+
+  @keyframes pulse-gold {
+    from { color: #a18750; }
+    to { color: #dfbe7a; }
+  }
+
+  /* Marquee animation */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 2rem;
+  }
+
+  .marquee-content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: 2rem;
+    animation: scroll 40s linear infinite;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* Slow luxury color shift animation for main headings */
+  .animate-slow-color-shift {
+    background: linear-gradient(
+      120deg,
+      #ffffff 0%,
+      #fbf7ee 18%,
+      #dfbe7a 40%,
+      #c6a35b 52%,
+      #f7f0df 72%,
+      #ffffff 100%
+    );
+    background-size: 280% 280%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: slowColorShift 8s ease-in-out infinite;
+  }
+
+  @keyframes slowColorShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+
