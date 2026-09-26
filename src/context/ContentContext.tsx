@@ -185,8 +185,19 @@ function mergeSiteData(defaults: SiteData, savedRaw: string | null): SiteData {
 }
 
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Respect user's previously selected language across reloads and browser sessions
-  const [lang, setLang] = useState<'ko' | 'en'>('ko');
+  // Always default to English ('en') on initial page load / fresh visit
+  const [lang, setLang] = useState<'ko' | 'en'>(() => {
+    if (typeof window !== 'undefined') {
+      const explicitUserSelected = localStorage.getItem('xenians_lang_user_selected');
+      if (explicitUserSelected === 'true') {
+        const savedLang = localStorage.getItem('xenians_lang');
+        if (savedLang === 'ko' || savedLang === 'en') {
+          return savedLang;
+        }
+      }
+    }
+    return 'en'; // Default is always English
+  });
 
   const [dataKo, setDataKo] = useState<SiteData>(() => {
     const saved = getLatestStoredData('xenians_site_data_ko');

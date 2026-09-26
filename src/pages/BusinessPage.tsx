@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { useContent } from '../context/ContentContext';
 import { PageHeader } from '../components/PageHeader';
 import { 
@@ -704,119 +705,125 @@ export const BusinessPage: React.FC = () => {
 
       {/* 2. MAIN BUSINESS DETAIL (Left Vertical Division Selector + Right Clean Content) */}
       <section className="py-16 md:py-24 px-6 md:px-[6vw]">
-        <div className="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Left Vertical Division List (Unboxed, Direct on Background with Refined Hover Animation) */}
-          <div className="lg:col-span-4 lg:sticky lg:top-32 pr-0 lg:pr-6">
-            <div className="mb-6 pb-4 border-b border-black/[0.08] flex items-center justify-between">
-              <span className="text-[11px] font-mono tracking-[0.25em] text-[#c6a35b] font-bold uppercase">
+          {/* Left Vertical Division List (Simple, High-Contrast Minimalist Box Menu) */}
+          <div className="lg:col-span-4 lg:sticky lg:top-32 pr-0 lg:pr-4">
+            <div className="mb-5 pb-3 border-b border-black/[0.08] flex items-center justify-between">
+              <span className="text-[11px] font-mono tracking-[0.25em] text-[#a18750] font-bold uppercase">
                 BUSINESS SECTORS
               </span>
-              <span className="text-[11px] font-mono text-[#888888] font-semibold">
+              <span className="text-[11px] font-mono text-[#777777] font-semibold">
                 0{divisions.length} DIVISIONS
               </span>
             </div>
 
-            <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-1.5">
+            <nav className="flex flex-col gap-2.5">
               {divisions.map((div) => {
                 const isActive = div.id === current.id;
                 return (
-                  <button
+                  <motion.button
                     key={div.id}
                     onClick={() => handleTabChange(div.id)}
-                    className={`group relative cursor-pointer w-full text-left py-2.5 sm:py-3.5 px-3 sm:px-4 rounded-md transition-all duration-300 flex items-center justify-between hover:translate-x-1 sm:hover:translate-x-2 border border-transparent ${
+                    whileHover={{ x: 6 }}
+                    whileTap={{ scale: 0.985 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className={`group cursor-pointer relative w-full text-left py-3.5 px-4.5 rounded-lg transition-all duration-300 flex items-center justify-between border overflow-hidden ${
                       isActive
-                        ? 'bg-white text-[#141413] shadow-[0_4px_16px_rgba(198,163,91,0.14)] border-[#c6a35b]/40'
-                        : 'text-[#444444] hover:bg-white hover:text-[#141413] hover:shadow-xs hover:border-black/[0.06]'
+                        ? 'bg-white text-[#111111] border-[#c6a35b] shadow-[0_10px_25px_-5px_rgba(198,163,91,0.2),0_0_0_1px_rgba(198,163,91,0.3)] font-bold'
+                        : 'bg-[#faf8f4] text-[#444444] border-black/[0.06] hover:bg-white hover:text-[#111111] hover:border-[#c6a35b]/50 hover:shadow-md'
                     }`}
                   >
-                    {/* Active / Hover Dynamic Gold Indicator Bar */}
-                    <span 
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] sm:w-[4px] rounded-full transition-all duration-300 ${
-                        isActive 
-                          ? 'h-6 sm:h-8 bg-[#c6a35b] shadow-xs' 
-                          : 'h-0 bg-[#c6a35b] group-hover:h-5 sm:group-hover:h-6'
-                      }`} 
-                    />
+                    {/* Active Left Metallic Gold Pillar Indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSectorPillar"
+                        className="absolute left-0 inset-y-0 w-1.5 bg-gradient-to-b from-[#dfbe7a] via-[#c6a35b] to-[#a18750] shadow-[0_0_10px_rgba(198,163,91,0.8)]"
+                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      />
+                    )}
 
-                    <div className="flex items-center gap-2.5 sm:gap-3.5 pl-1.5 sm:pl-2 min-w-0">
+                    {/* Subtle Hover Gradient Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#c6a35b]/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                    <div className="flex items-center gap-3.5 min-w-0 relative z-10">
                       <span
-                        className={`font-mono text-[11px] sm:text-[12px] font-bold transition-colors duration-300 shrink-0 ${
-                          isActive ? 'text-[#c6a35b]' : 'text-[#888888] group-hover:text-[#c6a35b]'
+                        className={`font-mono text-[12.5px] font-bold shrink-0 transition-colors duration-200 ${
+                          isActive ? 'text-[#a18750]' : 'text-[#888888] group-hover:text-[#a18750]'
                         }`}
                       >
                         {div.tabNumber}
                       </span>
                       <span
-                        className={`font-sans text-[13.5px] sm:text-[15px] lg:text-[15.5px] truncate transition-all duration-300 ${
-                          isActive
-                            ? 'font-bold text-[#141413]'
-                            : 'font-medium text-[#444444] group-hover:text-[#141413] group-hover:font-semibold'
+                        className={`font-sans text-[14.5px] sm:text-[15px] tracking-tight truncate transition-colors duration-200 ${
+                          isActive ? 'font-bold text-[#111111]' : 'font-medium text-[#2d2c29] group-hover:text-[#111111]'
                         }`}
                       >
                         {lang === 'ko' ? div.tabLabelKo : div.tabLabel}
                       </span>
                     </div>
 
-                    <ArrowRight
-                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-300 shrink-0 ${
-                        isActive
-                          ? 'text-[#c6a35b] translate-x-1 opacity-100'
-                          : 'text-[#c6a35b] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-1'
-                      }`}
-                    />
-                  </button>
+                    <div className="relative z-10 flex items-center pl-2 shrink-0">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isActive 
+                          ? 'bg-[#c6a35b] text-[#141413] shadow-2xs translate-x-0.5' 
+                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-[#c6a35b] group-hover:text-[#141413] group-hover:scale-110 group-hover:translate-x-0.5'
+                      }`}>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform" />
+                      </div>
+                    </div>
+                  </motion.button>
                 );
               })}
             </nav>
 
-            <div className="mt-8 pt-6 border-t border-black/[0.08] font-sans text-[13.5px] text-[#666666] leading-relaxed break-keep">
+            <div className="mt-6 pt-5 border-t border-black/[0.08] font-sans text-[13.5px] text-[#555555] leading-relaxed break-keep">
               {lang === 'ko' 
-                ? '제니안스는 각 분야 최고의 전문 인력으로 구성된 팀을 통해 맞춤형 자산 솔루션을 제공합니다.'
+                ? '제니안스는 각 분야 최고의 전문 인력으로 구성된 전담 팀을 통해 맞춤형 자산 솔루션을 제공합니다.'
                 : 'XENIANS provides tailored real estate solutions through dedicated multi-disciplinary advisory teams.'}
             </div>
           </div>
 
-          {/* Right Main Content (Unboxed, Sitting Directly on Page Background) */}
+          {/* Right Main Content */}
           <div className="lg:col-span-8">
-            {/* Top Featured Service Image with Realistic Photography */}
-            <div className="w-full h-[280px] sm:h-[360px] md:h-[420px] rounded-sm overflow-hidden mb-10 border border-black/[0.08] shadow-sm relative group">
+            {/* Top Featured Service Image */}
+            <div className="w-full h-[260px] sm:h-[340px] md:h-[400px] rounded-sm overflow-hidden mb-8 border border-black/[0.08] shadow-sm relative group">
               <img
                 src={current.imageSrc}
                 alt={current.title}
-                className="w-full h-full object-cover object-center brightness-95 group-hover:scale-103 transition-transform duration-700"
+                className="w-full h-full object-cover object-center brightness-95 group-hover:scale-102 transition-transform duration-500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = '/images/hero-seoul-skyline.jpg';
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-5 text-white/90 font-mono text-[11px] tracking-widest uppercase bg-black/40 px-3 py-1 backdrop-blur-xs rounded-xs">
+              <div className="absolute bottom-4 left-5 text-white/95 font-mono text-[11px] tracking-widest uppercase bg-black/50 px-3 py-1 backdrop-blur-xs rounded-xs font-semibold">
                 {current.tabLabel}
               </div>
             </div>
 
             {/* Division Title & Description */}
-            <div className="mb-10 pb-8 border-b border-black/[0.08]">
-              <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#c6a35b] font-bold uppercase block mb-3">
+            <div className="mb-8 pb-7 border-b border-black/[0.08]">
+              <span className="text-[11px] font-mono tracking-[0.25em] text-[#a18750] font-bold uppercase block mb-2.5">
                 {current.tabNumber} / XENIANS BUSINESS DIVISION
               </span>
-              <h2 className="font-serif text-[28px] sm:text-[36px] text-[#9e7a32] font-medium mb-5 leading-tight">
+              <h2 className="font-sans text-[26px] sm:text-[32px] md:text-[34px] text-[#111111] font-bold mb-4 leading-tight">
                 {lang === 'ko' ? current.titleKo : current.title}
               </h2>
-              <p className="text-[15px] sm:text-[16.5px] text-[#444444] leading-[1.85] font-normal break-keep">
+              <p className="font-sans text-[15px] sm:text-[16px] text-[#333333] leading-[1.8] font-normal break-keep">
                 {lang === 'ko' ? current.descKo : current.descEn}
               </p>
             </div>
 
-            {/* Key Value Points List - Interactive Expandable Scope Rows (Unboxed, Direct on Background) */}
-            <div className="space-y-2 pt-2">
+            {/* Key Scopes & Value Drivers Accordion */}
+            <div className="space-y-3 pt-1">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-2 border-b border-black/[0.08]">
-                <span className="text-[11px] font-mono tracking-[0.25em] text-[#9e7a32] font-bold uppercase">
+                <span className="text-[11px] font-mono tracking-[0.25em] text-[#111111] font-bold uppercase">
                   KEY SCOPES & VALUE DRIVERS
                 </span>
-                <span className="text-[12.5px] font-sans text-[#a18750] font-semibold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c6a35b] animate-pulse" />
-                  {lang === 'ko' ? '각 항목을 클릭하시면 전문 상세 내용이 표시됩니다' : 'Click any item below to view detailed execution scopes'}
+                <span className="text-[12px] font-sans text-[#777777] font-medium flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#c6a35b]" />
+                  {lang === 'ko' ? '항목을 클릭하시면 상세 실행 내역이 표시됩니다' : 'Click any item below to view detailed execution scopes'}
                 </span>
               </div>
 
@@ -825,10 +832,10 @@ export const BusinessPage: React.FC = () => {
                 return (
                   <div 
                     key={pIdx} 
-                    className={`border transition-all duration-300 rounded-sm ${
+                    className={`border transition-all duration-200 rounded-sm bg-white ${
                       isExpanded 
-                        ? 'bg-white border-[#c6a35b] shadow-[0_8px_24px_rgba(198,163,91,0.14)] p-5' 
-                        : 'border-black/[0.08] hover:border-[#c6a35b]/70 hover:bg-white hover:shadow-[0_4px_16px_rgba(198,163,91,0.1)] p-4 sm:p-4.5'
+                        ? 'border-[#c6a35b] shadow-sm p-5' 
+                        : 'border-black/[0.08] hover:border-black/20 p-4 sm:p-4.5'
                     }`}
                   >
                     {/* Header / Click Trigger */}
@@ -838,15 +845,15 @@ export const BusinessPage: React.FC = () => {
                       className="w-full cursor-pointer flex items-start sm:items-center justify-between gap-4 text-left transition-colors"
                       aria-expanded={isExpanded}
                     >
-                      <div className="flex items-start sm:items-center gap-3.5">
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 sm:mt-0 transition-colors ${
-                          isExpanded ? 'bg-[#c6a35b] text-white shadow-xs' : 'bg-[#141413] text-[#c6a35b]'
+                      <div className="flex items-start sm:items-center gap-3">
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 sm:mt-0 transition-colors ${
+                          isExpanded ? 'bg-[#c6a35b] text-white' : 'bg-black/[0.06] text-[#555555]'
                         }`}>
-                          <CheckCircle2 className="w-4 h-4" />
+                          <CheckCircle2 className="w-3.5 h-3.5" />
                         </div>
                         <div>
-                          <span className={`text-[15.5px] sm:text-[16.5px] leading-snug transition-colors ${
-                            isExpanded ? 'font-bold text-[#9e7a32]' : 'font-semibold text-[#9e7a32] group-hover:text-[#b88c3a]'
+                          <span className={`font-sans text-[15.5px] sm:text-[16px] leading-snug transition-colors ${
+                            isExpanded ? 'font-bold text-[#111111]' : 'font-semibold text-[#222222] hover:text-[#111111]'
                           }`}>
                             {lang === 'ko' ? pt.titleKo : pt.titleEn}
                           </span>
@@ -854,64 +861,64 @@ export const BusinessPage: React.FC = () => {
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0 ml-2">
-                        <span className={`hidden sm:inline-block text-[11.5px] font-mono tracking-wider font-semibold transition-colors ${
-                          isExpanded ? 'text-[#c6a35b]' : 'text-[#777777]'
+                        <span className={`hidden sm:inline-block text-[11.5px] font-sans font-medium transition-colors ${
+                          isExpanded ? 'text-[#a18750]' : 'text-[#777777]'
                         }`}>
                           {isExpanded 
-                            ? (lang === 'ko' ? '상세 닫기' : 'CLOSE') 
-                            : (lang === 'ko' ? '전문 상세 보기' : 'VIEW DETAILS')}
+                            ? (lang === 'ko' ? '닫기' : 'Close') 
+                            : (lang === 'ko' ? '상세보기' : 'View Detail')}
                         </span>
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300 ${
-                          isExpanded ? 'rotate-180 text-[#c6a35b] bg-[#c6a35b]/15' : 'text-black/40 bg-black/[0.04]'
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-transform duration-200 ${
+                          isExpanded ? 'rotate-180 text-[#a18750] bg-[#c6a35b]/10' : 'text-black/40 bg-black/[0.04]'
                         }`}>
                           <ChevronDown className="w-4 h-4" />
                         </div>
                       </div>
                     </button>
 
-                    {/* Expandable In-Depth Professional Explanation with Direct Background Layout */}
+                    {/* Expandable Explanation */}
                     {isExpanded && (
-                      <div className="pt-5 pb-2 px-1 animate-fadeIn border-t border-black/[0.06] mt-4">
-                        {/* Scope Narrative - English title with high readability */}
-                        <div className="mb-6">
-                          <div className="flex items-center gap-2 mb-2.5">
-                            <span className="w-2 h-2 rounded-full bg-[#c6a35b]" />
-                            <span className="text-[11px] font-mono tracking-[0.25em] text-[#a18750] font-bold uppercase">
+                      <div className="pt-5 pb-1 animate-fadeIn border-t border-black/[0.06] mt-4">
+                        {/* Scope Narrative */}
+                        <div className="mb-5">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#c6a35b]" />
+                            <span className="text-[11px] font-mono tracking-[0.2em] text-[#a18750] font-bold uppercase">
                               EXECUTION ROADMAP & METHODOLOGY
                             </span>
                           </div>
-                          <p className="text-[15px] sm:text-[15.5px] text-[#242422] leading-[1.85] font-normal break-keep pl-3.5 border-l-2 border-[#c6a35b]/40">
+                          <p className="font-sans text-[14.5px] sm:text-[15px] text-[#333333] leading-[1.8] font-normal break-keep pl-3.5 border-l-2 border-[#c6a35b]/50">
                             {lang === 'ko' ? pt.descKo : pt.descEn}
                           </p>
                         </div>
 
-                        {/* Deliverables & Strategic Value Grid - English titles with clear contrast */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        {/* Deliverables & Strategic Value Grid (Simple Minimalist Sub-Boxes) */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
                           {/* Deliverables */}
-                          <div className="p-4 sm:p-5 rounded-xs border-l-3 border-[#a18750] bg-[#faf8f3] hover:bg-white hover:border-[#c6a35b] hover:shadow-[0_8px_20px_rgba(198,163,91,0.14)] transition-all duration-300 flex items-start gap-3.5">
-                            <div className="w-8 h-8 rounded-full bg-[#141413] text-[#c6a35b] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                              <FileText className="w-4 h-4" />
+                          <div className="p-4 rounded-sm border border-black/[0.08] bg-[#faf9f6] flex items-start gap-3">
+                            <div className="w-7 h-7 rounded-full bg-black/[0.06] text-[#333333] flex items-center justify-center shrink-0 mt-0.5">
+                              <FileText className="w-3.5 h-3.5" />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <span className="text-[11px] font-mono tracking-[0.2em] text-[#a18750] font-bold uppercase block">
+                              <span className="text-[10.5px] font-mono tracking-[0.15em] text-[#777777] font-bold uppercase block">
                                 KEY DELIVERABLES
                               </span>
-                              <span className="text-[14px] sm:text-[14.5px] font-semibold text-[#141413] leading-relaxed block mt-1.5">
+                              <span className="font-sans text-[13.5px] sm:text-[14px] font-semibold text-[#111111] leading-relaxed block mt-1">
                                 {lang === 'ko' ? pt.deliverableKo : pt.deliverableEn}
                               </span>
                             </div>
                           </div>
 
                           {/* Strategic Value */}
-                          <div className="p-4 sm:p-5 rounded-xs border-l-3 border-[#c6a35b] bg-[#faf8f3] hover:bg-white hover:border-[#a18750] hover:shadow-[0_8px_20px_rgba(198,163,91,0.14)] transition-all duration-300 flex items-start gap-3.5">
-                            <div className="w-8 h-8 rounded-full bg-[#141413] text-[#c6a35b] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                              <TrendingUp className="w-4 h-4" />
+                          <div className="p-4 rounded-sm border border-black/[0.08] bg-[#faf9f6] flex items-start gap-3">
+                            <div className="w-7 h-7 rounded-full bg-black/[0.06] text-[#333333] flex items-center justify-center shrink-0 mt-0.5">
+                              <TrendingUp className="w-3.5 h-3.5" />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <span className="text-[11px] font-mono tracking-[0.2em] text-[#a18750] font-bold uppercase block">
+                              <span className="text-[10.5px] font-mono tracking-[0.15em] text-[#777777] font-bold uppercase block">
                                 STRATEGIC VALUE DRIVERS
                               </span>
-                              <span className="text-[14px] sm:text-[14.5px] font-semibold text-[#141413] leading-relaxed block mt-1.5">
+                              <span className="font-sans text-[13.5px] sm:text-[14px] font-semibold text-[#111111] leading-relaxed block mt-1">
                                 {lang === 'ko' ? pt.strategyKo : pt.strategyEn}
                               </span>
                             </div>
@@ -928,66 +935,59 @@ export const BusinessPage: React.FC = () => {
 
         </div>
 
-        {/* 3. TAILORED PROCESS FLOW (Distinct for each business division - '5단계' removed per request) */}
-        <div className="max-w-[1500px] mx-auto mt-20 pt-14 border-t border-black/[0.08]">
+        {/* 3. TAILORED PROCESS FLOW (Clean Minimalist Process Cards) */}
+        <div className="max-w-[1500px] mx-auto mt-20 pt-12 border-t border-black/[0.08]">
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-[11px] font-mono tracking-[0.25em] text-[#c6a35b] font-bold uppercase block mb-2.5">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-[11px] font-mono tracking-[0.25em] text-[#a18750] font-bold uppercase block mb-2">
               {current.tabNumber} / {current.tabLabel} PROCESS FLOW
             </span>
-            <h3 className="font-serif text-[26px] sm:text-[32px] text-[#9e7a32] font-medium mb-3">
+            <h3 className="font-sans text-[24px] sm:text-[28px] text-[#111111] font-bold mb-2.5">
               {lang === 'ko' 
                 ? `${current.tabLabelKo} 표준 실행 프로세스` 
                 : `${current.tabLabel} Standard Execution Methodology`}
             </h3>
-            <p className="text-[14.5px] sm:text-[15.5px] text-[#555555] leading-relaxed break-keep">
+            <p className="font-sans text-[14px] sm:text-[15px] text-[#555555] leading-relaxed break-keep">
               {lang === 'ko'
-                ? '제니안스 그룹의 독보적인 데이터 분석과 금융 공학, 현장 실무력을 바탕으로 단계별 가치를 극대화하는 표준 실행 로드맵입니다.'
+                ? '제니안스 그룹의 데이터 분석과 금융 구조화 역량을 바탕으로 단계별 가치를 극대화하는 표준 실행 로드맵입니다.'
                 : 'A structured, institutional-grade execution roadmap engineered to maximize asset value at every critical milestone.'}
             </p>
           </div>
 
-          {/* Process Flow Grid - Unboxed with Enhanced Hover Animation Color */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative">
+          {/* Process Flow Grid - Clean Simple Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4.5 relative">
             {current.processFlow.map((step, sIdx) => {
               return (
                 <div
                   key={sIdx}
-                  className="pt-6 pb-6 px-4 border-t-2 border-black/[0.12] hover:border-t-[3px] hover:border-[#c6a35b] transition-all duration-300 flex flex-col justify-between group relative hover:bg-[#ffffff] hover:shadow-[0_12px_28px_rgba(198,163,91,0.14)] hover:-translate-y-1 rounded-sm"
+                  className="p-5 bg-white border border-black/[0.08] hover:border-[#c6a35b] transition-all duration-200 flex flex-col justify-between rounded-sm shadow-2xs hover:shadow-sm"
                 >
                   {/* Step Badge & Icon */}
                   <div>
-                    <div className="flex items-center justify-between mb-5">
-                      <span className="font-mono text-[11px] font-bold text-[#c6a35b] tracking-widest uppercase bg-black/[0.04] group-hover:bg-[#141413] group-hover:text-[#c6a35b] px-2.5 py-1 rounded-xs transition-colors">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-[11px] font-bold text-[#a18750] tracking-wider uppercase bg-[#faf8f4] px-2 py-0.5 rounded-xs border border-black/[0.04]">
                         STEP {step.step}
                       </span>
-                      <div className="w-9 h-9 rounded-full bg-black/[0.04] flex items-center justify-center group-hover:bg-[#141413] group-hover:text-[#c6a35b] group-hover:shadow-xs transition-all duration-300">
+                      <div className="w-8 h-8 rounded-full bg-[#faf8f4] border border-black/[0.04] flex items-center justify-center text-[#555555]">
                         {renderStepIcon(step.iconName)}
                       </div>
                     </div>
 
                     {/* Step English Subtitle */}
-                    <span className="font-mono text-[10.5px] tracking-wider text-[#888888] font-bold uppercase block mb-1">
+                    <span className="font-mono text-[10px] tracking-wider text-[#888888] font-bold uppercase block mb-1">
                       {step.label}
                     </span>
 
-                    {/* Step Title in High-Contrast Prestige Gold */}
-                    <h4 className="font-sans text-[15.5px] sm:text-[16px] font-bold text-[#9e7a32] mb-3 leading-snug group-hover:text-[#b88c3a] transition-colors">
+                    {/* Step Title in High-Contrast Black */}
+                    <h4 className="font-sans text-[15px] font-bold text-[#111111] mb-2 leading-snug">
                       {lang === 'ko' ? step.titleKo : step.titleEn}
                     </h4>
 
                     {/* Step Description */}
-                    <p className="text-[13.5px] text-[#555555] leading-relaxed break-keep">
+                    <p className="font-sans text-[13px] sm:text-[13.5px] text-[#444444] leading-relaxed break-keep">
                       {lang === 'ko' ? step.descKo : step.descEn}
                     </p>
                   </div>
-
-                  {/* Visual connector arrow for desktop */}
-                  {sIdx < current.processFlow.length - 1 && (
-                    <div className="hidden lg:block absolute -right-3 top-12 z-10 text-black/20 pointer-events-none">
-                      <ArrowRight className="w-4 h-4 text-[#c6a35b]/60" />
-                    </div>
-                  )}
                 </div>
               );
             })}

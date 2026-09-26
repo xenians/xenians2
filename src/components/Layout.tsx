@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, AnimatePresence } from 'motion/react';
 import { 
@@ -32,6 +32,24 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const { scrollY } = useScroll();
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openBusinessMenu = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsBusinessOpen(true);
+  };
+
+  const closeBusinessMenu = (delay = 180) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsBusinessOpen(false);
+    }, delay);
+  };
 
   // Helper to dynamically get navigation menu names customized in Admin Dashboard
   const getNavLabel = (path: string, fallbackKo: string, fallbackEn: string) => {
@@ -126,8 +144,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 <div
                   key={item.path}
                   className="relative h-full py-7 flex items-center"
-                  onMouseEnter={() => setIsBusinessOpen(true)}
-                  onMouseLeave={() => setIsBusinessOpen(false)}
+                  onMouseEnter={openBusinessMenu}
+                  onMouseLeave={() => closeBusinessMenu(180)}
                 >
                   <NavLink
                     to={item.path}
@@ -148,181 +166,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                       isBusinessActive ? "w-[60%]" : "w-0 group-hover:w-[60%]"
                     )} />
                   </NavLink>
-
-                  {/* Business 5-Division Architectural Luxury Flyout */}
-                  <AnimatePresence>
-                    {isBusinessOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.985 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 6, scale: 0.985 }}
-                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute top-[calc(100%-4px)] left-1/2 -translate-x-[42%] xl:-translate-x-1/2 w-[700px] bg-white text-[#141413] border border-[#c6a35b]/45 shadow-[0_32px_75px_-15px_rgba(0,0,0,0.3),0_0_0_1px_rgba(198,163,91,0.2)] z-50 rounded-xl overflow-hidden flex flex-col"
-                      >
-                        {/* Invisible hover bridge to prevent any cursor drop-off */}
-                        <div className="absolute -top-3 inset-x-0 h-4 pointer-events-auto" />
-
-                        {/* Top Hairline Metallic Accent Bar */}
-                        <div className="h-[3px] w-full bg-gradient-to-r from-[#dfbe7a]/30 via-[#c6a35b] to-[#dfbe7a]/30" />
-
-                        {/* Split Architectural Container */}
-                        <div className="flex">
-                          {/* Left Brand Vision & Matrix Showcase (approx 230px) */}
-                          <div className="w-[230px] shrink-0 bg-gradient-to-b from-[#181816] via-[#141413] to-[#0f0f0e] text-white p-5 flex flex-col justify-between relative overflow-hidden border-r border-[#262624]">
-                            {/* Subtle gold glow watermark */}
-                            <div className="pointer-events-none absolute -bottom-10 -right-10 w-36 h-36 rounded-full bg-[#c6a35b]/10 blur-2xl" />
-
-                            {/* Top Tag */}
-                            <div className="relative z-10">
-                              <div className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#c6a35b] shadow-[0_0_8px_rgba(198,163,91,0.8)]" />
-                                <span className="font-mono text-[9px] tracking-[0.25em] text-[#c6a35b] uppercase font-bold">
-                                  VALUE CHAIN
-                                </span>
-                              </div>
-                              <div className="mt-4">
-                                <h4 className="font-sans text-[15px] font-bold text-white leading-snug tracking-tight">
-                                  {lang === 'ko' ? (
-                                    <>
-                                      부동산 생애주기
-                                      <br />
-                                      전체 통합 플랫폼
-                                    </>
-                                  ) : (
-                                    <>
-                                      Integrated
-                                      <br />
-                                      Real Estate Matrix
-                                    </>
-                                  )}
-                                </h4>
-                                <p className="mt-2 text-[11px] font-sans text-neutral-400 leading-relaxed font-light">
-                                  {lang === 'ko' 
-                                    ? '기획·인수부터 개발, 분양, 운영 및 FM까지 유기적으로 연계된 5대 핵심 사업부'
-                                    : 'End-to-end execution across 5 specialized divisions for maximum asset value.'}
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Middle Metric Badge */}
-                            <div className="relative z-10 my-4 py-3 border-y border-white/[0.08]">
-                              <div className="flex items-center justify-between text-[10px] font-mono text-[#c6a35b]">
-                                <span>01 — 05 DIVISIONS</span>
-                                <span className="text-neutral-400">ONE-STOP</span>
-                              </div>
-                            </div>
-
-                            {/* Bottom Overview CTA */}
-                            <div className="relative z-10 pt-1">
-                              <Link
-                                to="/business"
-                                onClick={handleNavClick}
-                                className="group/btn flex items-center justify-between text-[11.5px] font-mono tracking-wider text-[#dfbe7a] hover:text-white transition-all py-1 px-1.5 rounded hover:bg-white/5"
-                              >
-                                <span className="font-semibold group-hover/btn:translate-x-0.5 transition-transform">{lang === 'ko' ? '사업부 전체보기' : 'VIEW ALL'}</span>
-                                <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover/btn:bg-[#c6a35b] group-hover/btn:border-[#c6a35b] group-hover/btn:text-[#141413] group-hover/btn:scale-110 transition-all shadow-xs">
-                                  <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
-                                </div>
-                              </Link>
-                            </div>
-                          </div>
-
-                          {/* Right Divisions List (470px) */}
-                          <div className="flex-1 bg-gradient-to-b from-[#ffffff] to-[#faf8f5] flex flex-col justify-between">
-                            {/* Header Row */}
-                            <div className="px-5 pt-3 pb-2 flex items-center justify-between border-b border-black/[0.04]">
-                              <span className="text-[9.5px] font-mono tracking-[0.2em] text-[#8e8a80] uppercase font-semibold">
-                                CORE SPECIALIZATIONS
-                              </span>
-                              <span className="text-[9.5px] font-mono text-[#a18750] tracking-wider uppercase font-medium">
-                                5 DIVISIONS
-                              </span>
-                            </div>
-
-                            {/* 5 Division Links */}
-                            <div className="p-2 space-y-1">
-                              {businessDivisions.map((div, idx) => {
-                                const DivIcon = div.icon;
-                                const isDivActive = location.pathname === div.path;
-                                const numStr = String(idx + 1).padStart(2, '0');
-                                const titleKo = div.labelKo.replace(/^\d+\s*/, '');
-                                const titleEn = div.labelEn.replace(/^\d+\s*/, '');
-
-                                return (
-                                  <Link
-                                    key={div.key}
-                                    to={div.path}
-                                    onClick={handleNavClick}
-                                    className={cn(
-                                      "group relative px-3.5 py-2.5 rounded-lg flex items-center justify-between transition-all duration-200 border border-transparent",
-                                      isDivActive
-                                        ? "bg-[#f5ede0] border-[#c6a35b]/50 shadow-xs"
-                                        : "hover:bg-[#f6ede0] hover:border-[#c6a35b]/60 hover:shadow-md hover:-translate-y-0.5"
-                                    )}
-                                  >
-                                    {/* Left accent indicator - prominent glow on hover */}
-                                    <div
-                                      className={cn(
-                                        "absolute left-0 inset-y-1.5 w-1 rounded-r transition-all duration-200",
-                                        isDivActive 
-                                          ? "bg-[#c6a35b] opacity-100 w-1.5 shadow-[0_0_8px_rgba(198,163,91,0.6)]" 
-                                          : "bg-[#c6a35b] opacity-0 group-hover:opacity-100 group-hover:w-1.5 group-hover:shadow-[0_0_8px_rgba(198,163,91,0.6)]"
-                                      )}
-                                    />
-
-                                    <div className="flex items-center gap-3.5 min-w-0">
-                                      {/* Architectural Icon Box */}
-                                      <div className={cn(
-                                        "w-8 h-8 rounded-md flex items-center justify-center shrink-0 transition-all duration-200 border",
-                                        isDivActive
-                                          ? "bg-[#141413] text-[#c6a35b] border-[#141413] shadow-xs scale-105"
-                                          : "bg-[#f5f2ea] text-[#555555] border-black/[0.05] group-hover:bg-[#141413] group-hover:text-[#c6a35b] group-hover:border-[#c6a35b] group-hover:shadow-xs group-hover:scale-110"
-                                      )}>
-                                        <DivIcon className="w-3.5 h-3.5 stroke-[1.75]" />
-                                      </div>
-
-                                      {/* Text Container */}
-                                      <div className="flex flex-col min-w-0">
-                                        <div className="flex items-center gap-2">
-                                          <span className={cn(
-                                            "font-mono text-[11px] font-bold tracking-wider transition-colors shrink-0",
-                                            isDivActive ? "text-[#a18750]" : "text-[#a18750] group-hover:text-[#c6a35b] group-hover:font-extrabold"
-                                          )}>
-                                            {numStr}
-                                          </span>
-                                          <span className="font-sans font-bold text-[13px] text-[#1a1a19] group-hover:text-[#9e7a32] transition-colors tracking-tight truncate">
-                                            {lang === 'ko' ? titleKo : titleEn}
-                                          </span>
-                                          <span className="font-mono text-[9px] text-[#9a958b] group-hover:text-[#a18750] tracking-wider uppercase font-medium truncate transition-colors">
-                                            {lang === 'ko' ? titleEn : ''}
-                                          </span>
-                                        </div>
-                                        <p className="text-[11px] font-sans text-[#666666] group-hover:text-[#222222] transition-colors truncate mt-0.5 font-normal">
-                                          {lang === 'ko' ? div.subKo : div.subEn}
-                                        </p>
-                                      </div>
-                                    </div>
-
-                                    {/* Right Action Arrow */}
-                                    <div className="flex items-center pl-2 shrink-0">
-                                      <div className={cn(
-                                        "w-6 h-6 rounded-full flex items-center justify-center transition-all duration-200",
-                                        isDivActive
-                                          ? "text-[#141413] bg-[#c6a35b] shadow-xs"
-                                          : "text-black/25 group-hover:text-[#141413] group-hover:bg-[#c6a35b] group-hover:scale-110 group-hover:shadow-xs group-hover:translate-x-0.5"
-                                      )}>
-                                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform" />
-                                      </div>
-                                    </div>
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
               );
             }
@@ -387,6 +230,139 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </button>
         </div>
       </header>
+
+      {/* TESLA-STYLE FULL-WIDTH TOP MEGA MENU DROPDOWN */}
+      <AnimatePresence>
+        {isBusinessOpen && (
+          <>
+            {/* Smooth Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setIsBusinessOpen(false)}
+              className="fixed inset-0 top-20 md:top-24 bg-black/45 backdrop-blur-xs z-40 hidden lg:block"
+            />
+
+            {/* Full-Width Dropdown Panel that slides down from top */}
+            <motion.div
+              initial={{ opacity: 0, y: -24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              onMouseEnter={openBusinessMenu}
+              onMouseLeave={() => closeBusinessMenu(180)}
+              className="fixed top-20 md:top-24 left-0 right-0 w-full z-45 bg-[#ffffff] backdrop-blur-3xl border-b border-black/12 shadow-[0_30px_70px_-10px_rgba(0,0,0,0.22)] hidden lg:block"
+            >
+              {/* Top Gold Accent Line */}
+              <div className="h-[2.5px] w-full bg-gradient-to-r from-[#dfbe7a] via-[#c6a35b] to-[#dfbe7a]" />
+
+              <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 lg:py-10">
+                {/* Mega Menu Top Meta Header */}
+                <div className="flex items-center justify-between mb-6 pb-3 border-b border-black/10">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#c6a35b] shadow-xs" />
+                    <span className="font-mono text-[12px] tracking-[0.22em] text-[#9e7a32] font-extrabold uppercase">
+                      {lang === 'ko' ? '제니안스 핵심 비즈니스 플랫폼' : 'XENIANS CORE BUSINESS PLATFORM'}
+                    </span>
+                  </div>
+                  <span className="font-mono text-[11px] tracking-[0.16em] text-[#333333] uppercase font-bold bg-[#faf7f2] px-3 py-1 rounded-full border border-black/8">
+                    05 INTEGRATED SECTORS
+                  </span>
+                </div>
+
+                {/* 5-Column Horizontal Layout (High Clarity & Visibility) */}
+                <div className="grid grid-cols-5 gap-4 lg:gap-5">
+                  {businessDivisions.map((div, idx) => {
+                    const DivIcon = div.icon;
+                    const isDivActive = location.pathname === div.path;
+                    const numStr = String(idx + 1).padStart(2, '0');
+                    const titleKo = div.labelKo.replace(/^\d+\s*/, '');
+                    const titleEn = div.labelEn.replace(/^\d+\s*/, '');
+
+                    return (
+                      <Link
+                        key={div.key}
+                        to={div.path}
+                        onClick={handleNavClick}
+                        className={cn(
+                          "group relative p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between border",
+                          isDivActive
+                            ? "bg-[#faf6ee] border-[#c6a35b] shadow-md ring-1 ring-[#c6a35b]/40"
+                            : "bg-[#ffffff] hover:bg-[#faf7f2] border-black/10 hover:border-[#c6a35b] hover:shadow-[0_16px_36px_-8px_rgba(198,163,91,0.28)] hover:-translate-y-1.5"
+                        )}
+                      >
+                        <div>
+                          {/* Icon + Number Header */}
+                          <div className="flex items-center justify-between mb-3.5">
+                            <div className={cn(
+                              "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 border shrink-0",
+                              isDivActive 
+                                ? "bg-[#9e7a32] text-white border-[#9e7a32] shadow-xs" 
+                                : "bg-[#faf7f2] text-[#9e7a32] border-[#c6a35b]/30 group-hover:bg-[#9e7a32] group-hover:text-white group-hover:border-[#9e7a32]"
+                            )}>
+                              <DivIcon className="w-5 h-5" />
+                            </div>
+
+                            <span className={cn(
+                              "font-mono text-[14px] font-extrabold tracking-wider transition-colors",
+                              isDivActive ? "text-[#9e7a32]" : "text-[#9e7a32] group-hover:text-[#7d5f22]"
+                            )}>
+                              {numStr}
+                            </span>
+                          </div>
+
+                          {/* Sector Title - Large & Bold */}
+                          <h3 className={cn(
+                            "font-sans text-[17px] xl:text-[18px] font-extrabold tracking-tight mb-2 transition-colors leading-snug",
+                            isDivActive ? "text-[#9e7a32]" : "text-[#111111] group-hover:text-[#9e7a32]"
+                          )}>
+                            {lang === 'ko' ? titleKo : titleEn}
+                          </h3>
+
+                          {/* Sector Sub-Summary - Clear & Highly Readable */}
+                          <p className="font-sans text-[12.5px] xl:text-[13px] font-medium text-[#444444] leading-relaxed line-clamp-2">
+                            {lang === 'ko' ? div.subKo : div.subEn}
+                          </p>
+                        </div>
+
+                        {/* Bottom Action Line */}
+                        <div className="mt-5 pt-3 border-t border-black/[0.08] flex items-center justify-between">
+                          <span className={cn(
+                            "font-mono text-[11px] font-extrabold tracking-wider uppercase transition-colors flex items-center gap-1",
+                            isDivActive ? "text-[#9e7a32]" : "text-[#111111] group-hover:text-[#9e7a32]"
+                          )}>
+                            <span>{lang === 'ko' ? '상세보기' : 'EXPLORE'}</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          </span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                {/* Bottom Full Navigation Link */}
+                <div className="mt-6 pt-4 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <span className="text-[13px] font-medium text-[#333333]">
+                    {lang === 'ko' 
+                      ? '기획, 투자, 금융자문부터 위탁운영까지 자산 가치를 극대화하는 종합 솔루션을 제공합니다.' 
+                      : 'Comprehensive end-to-end asset lifecycle solutions from advisory to turnkey operations.'}
+                  </span>
+                  <Link
+                    to="/business"
+                    onClick={handleNavClick}
+                    className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.16em] text-[#111111] hover:text-[#9e7a32] font-extrabold uppercase bg-[#faf7f2] hover:bg-[#f3ece0] px-4 py-2 rounded-full border border-black/10 hover:border-[#c6a35b] transition-all shrink-0"
+                  >
+                    <span>{lang === 'ko' ? '비즈니스 전체 개요 보기' : 'VIEW COMPLETE OVERVIEW'}</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* MOBILE MENU MODAL */}
       <AnimatePresence>
@@ -649,23 +625,27 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Admin Link */}
+        {/* Bottom Bar: Copyright on Left, Privacy Policy & Admin on Right */}
         <div className="max-w-[1500px] mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-white/50">
-          <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2">
-            <button
-              type="button"
-              onClick={() => setIsPrivacyOpen(true)}
-              className="font-sans text-[12px] sm:text-[12.5px] text-[#dfbe7a] hover:text-white font-medium underline underline-offset-4 cursor-pointer transition-colors"
-            >
-              {lang === 'ko' ? '개인정보처리방침' : 'Privacy Policy'}
-            </button>
-            <span className="text-white/25 hidden sm:inline">•</span>
-            <p className="font-sans text-[12px] sm:text-[12.5px] text-white/55 tracking-wide font-normal select-none">
+          <div>
+            <p className="font-sans text-[12px] sm:text-[12.5px] text-white/50 tracking-wide font-normal select-none">
               Copyright@XENIANS Inc. All Rights Reserved.
             </p>
           </div>
-          <div className="flex items-center gap-4 text-white/50 font-mono text-[11px]">
-            <Link to="/admin" onClick={handleNavClick} className="hover:text-[#c6a35b] transition-colors">
+          <div className="flex items-center gap-4 sm:gap-5 text-white/45 font-sans text-[12px] sm:text-[12.5px]">
+            <button
+              type="button"
+              onClick={() => setIsPrivacyOpen(true)}
+              className="hover:text-white font-normal cursor-pointer transition-colors"
+            >
+              {lang === 'ko' ? '개인정보처리방침' : 'Privacy Policy'}
+            </button>
+            <span className="text-white/20 select-none">•</span>
+            <Link 
+              to="/admin" 
+              onClick={handleNavClick} 
+              className="font-mono text-[11px] hover:text-white transition-colors"
+            >
               ADMIN LOGIN
             </Link>
           </div>
