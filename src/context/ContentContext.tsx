@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { SiteData } from '../types';
+import { SiteData, DetailedProject } from '../types';
 import { INITIAL_DATA_KO, INITIAL_DATA_EN } from '../constants';
 import { DEFAULT_DETAILED_PROJECTS } from '../data/defaultProjects';
 
 const MASTER_KEY_KO = 'xenians_site_data_ko_master';
 const MASTER_KEY_EN = 'xenians_site_data_en_master';
-const STORAGE_KEY_KO = 'xenians_site_data_ko_v33';
-const STORAGE_KEY_EN = 'xenians_site_data_en_v33';
+const STORAGE_KEY_KO = 'xenians_site_data_ko_v34';
+const STORAGE_KEY_EN = 'xenians_site_data_en_v34';
 
 interface ContentContextType {
   data: SiteData;
@@ -25,23 +25,22 @@ function getLatestStoredData(prefix: 'xenians_site_data_ko' | 'xenians_site_data
   if (typeof window === 'undefined' || !window.localStorage) return null;
   try {
     const langSuffix = prefix.endsWith('_ko') ? 'ko' : 'en';
-    // 1. Permanent master key
+    // 1. Current version key
+    const currentV = localStorage.getItem(`${prefix}_v34`);
+    if (currentV) return currentV;
+
+    // 2. Permanent master key
     const master = localStorage.getItem(`${prefix}_master`);
     if (master) return master;
 
-    // 2. Permanent fail-safe backup key
+    // 3. Permanent fail-safe backup key
     const perm = localStorage.getItem(`xenians_permanent_data_${langSuffix}`);
     if (perm) return perm;
-
-    // 3. Current version key
-    const currentV = localStorage.getItem(`${prefix}_v33`);
-    if (currentV) return currentV;
 
     // 4. Scan numbered version keys from v50 down to v1
     for (let v = 50; v >= 1; v--) {
       const val = localStorage.getItem(`${prefix}_v${v}`);
       if (val) {
-        // Automatically migrate to master key
         try {
           localStorage.setItem(`${prefix}_master`, val);
           localStorage.setItem(`xenians_permanent_data_${langSuffix}`, val);
@@ -70,9 +69,22 @@ function getLatestStoredData(prefix: 'xenians_site_data_ko' | 'xenians_site_data
   return null;
 }
 
+// Helper to sanitize and normalize projects with sequential numbering (01, 02, 03, ...)
+function normalizeProjects(projectsList: DetailedProject[]): DetailedProject[] {
+  return projectsList.map((p, idx) => ({
+    ...p,
+    num: String(idx + 1).padStart(2, '0')
+  }));
+}
+
 // Helper to deep merge stored data over default data without losing user modifications
 function mergeSiteData(defaults: SiteData, savedRaw: string | null): SiteData {
-  if (!savedRaw) return defaults;
+  if (!savedRaw) {
+    return {
+      ...defaults,
+      detailedProjects: normalizeProjects(defaults.detailedProjects || DEFAULT_DETAILED_PROJECTS)
+    };
+  }
   try {
     const sanitizedRaw = savedRaw.replace(/xenians\.com/gi, 'xenians.co.kr');
     const saved = JSON.parse(sanitizedRaw);
@@ -81,19 +93,30 @@ function mergeSiteData(defaults: SiteData, savedRaw: string | null): SiteData {
       ? defaults.detailedProjects
       : DEFAULT_DETAILED_PROJECTS;
 
-    // Preserve all customized detailedProjects directly as edited by the user,
-    // but automatically pick up brand-new projects added in code (by id) even if
-    // the visitor's browser has an older cached copy in localStorage that predates them.
-    const projects = (() => {
-      const savedProjects = saved.detailedProjects;
-      if (!savedProjects || savedProjects.length === 0) return defaultsProjects;
+    // Ensure all 10 projects from code exist and keep sequential numbering
+    const projects: DetailedProject[] = (() => {
+      const savedProjects: DetailedProject[] = saved.detailedProjects;
+      if (!savedProjects || savedProjects.length === 0) {
+        return normalizeProjects(defaultsProjects);
+      }
 
-      const savedIds = new Set(savedProjects.map((p: any) => p?.id));
-      const newFromCode = defaultsProjects.filter((p: any) => !savedIds.has(p?.id));
+      const savedMap = new Map(savedProjects.map((p) => [p.id, p]));
+      
+      // Build project list based on defaults canonical order first, retaining saved edits
+      const mergedList = defaultsProjects.map((defP) => {
+        const savedP = savedMap.get(defP.id);
+        if (savedP) {
+          return { ...defP, ...savedP };
+        }
+        return defP;
+      });
 
-      // New code-side projects are appended after saved ones. If you need them in a
-      // specific position, adjust the order here or clear localStorage on next deploy.
-      return newFromCode.length > 0 ? [...savedProjects, ...newFromCode] : savedProjects;
+      // Add any custom extra projects that user may have added in admin dashboard with novel ids
+      const defIds = new Set(defaultsProjects.map((p) => p.id));
+      const extraProjects = savedProjects.filter((p) => !defIds.has(p.id));
+
+      const fullList = [...mergedList, ...extraProjects];
+      return normalizeProjects(fullList);
     })();
 
     return {
@@ -163,24 +186,12 @@ function mergeSiteData(defaults: SiteData, savedRaw: string | null): SiteData {
 
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Respect user's previously selected language across reloads and browser sessions
-  const [lang, setLang] = useState<'ko' | 'en'>(() => {
-    if (typeof window !== 'undefined') {
-      const savedLang = localStorage.getItem('xenians_lang');
-      if (savedLang === 'ko' || savedLang === 'en') {
-        return savedLang;
-      }
-      const sessionLang = sessionStorage.getItem('xenians_session_lang');
-      if (sessionLang === 'ko' || sessionLang === 'en') {
-        return sessionLang;
-      }
-    }
-    return 'en';
-  });
+  const [lang, setLang] = useState<'ko' | 'en'>('ko');
 
   const [dataKo, setDataKo] = useState<SiteData>(() => {
     const saved = getLatestStoredData('xenians_site_data_ko');
     const merged = mergeSiteData(INITIAL_DATA_KO, saved);
-    if (saved && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       try {
         localStorage.setItem(MASTER_KEY_KO, JSON.stringify(merged));
         localStorage.setItem(STORAGE_KEY_KO, JSON.stringify(merged));
@@ -193,7 +204,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [dataEn, setDataEn] = useState<SiteData>(() => {
     const saved = getLatestStoredData('xenians_site_data_en');
     const merged = mergeSiteData(INITIAL_DATA_EN, saved);
-    if (saved && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       try {
         localStorage.setItem(MASTER_KEY_EN, JSON.stringify(merged));
         localStorage.setItem(STORAGE_KEY_EN, JSON.stringify(merged));
@@ -237,8 +248,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       // 2. Versioned keys for backward compatibility
       localStorage.setItem(STORAGE_KEY_KO, koStr);
       localStorage.setItem(STORAGE_KEY_EN, enStr);
-      localStorage.setItem('xenians_site_data_ko_v30', koStr);
-      localStorage.setItem('xenians_site_data_en_v30', enStr);
+      localStorage.setItem('xenians_site_data_ko_v34', koStr);
+      localStorage.setItem('xenians_site_data_en_v34', enStr);
       // 3. Multi-tier fail-safe permanent keys
       localStorage.setItem('xenians_permanent_data_ko', koStr);
       localStorage.setItem('xenians_permanent_data_en', enStr);
@@ -249,26 +260,29 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const updateData = (newData: SiteData) => {
+    const normalizedProjects = newData.detailedProjects ? normalizeProjects(newData.detailedProjects) : undefined;
+    const cleanNewData = normalizedProjects ? { ...newData, detailedProjects: normalizedProjects } : newData;
+
     // Synchronize shared data across both languages
     const sharedFields = {
-      detailedProjects: newData.detailedProjects,
-      contactInfo: newData.contactInfo,
-      navigation: newData.navigation,
-      assets: newData.assets,
-      theme: newData.theme,
-      trackRecordHeader: newData.trackRecordHeader,
-      footer: newData.footer,
-      company: newData.company,
+      detailedProjects: cleanNewData.detailedProjects,
+      contactInfo: cleanNewData.contactInfo,
+      navigation: cleanNewData.navigation,
+      assets: cleanNewData.assets,
+      theme: cleanNewData.theme,
+      trackRecordHeader: cleanNewData.trackRecordHeader,
+      footer: cleanNewData.footer,
+      company: cleanNewData.company,
     };
 
     if (lang === 'ko') {
-      const mergedKo: SiteData = { ...dataKo, ...newData };
+      const mergedKo: SiteData = { ...dataKo, ...cleanNewData };
       const mergedEn: SiteData = { ...dataEn, ...sharedFields };
       setDataKo(mergedKo);
       setDataEn(mergedEn);
       persistToStorage(mergedKo, mergedEn);
     } else {
-      const mergedEn: SiteData = { ...dataEn, ...newData };
+      const mergedEn: SiteData = { ...dataEn, ...cleanNewData };
       const mergedKo: SiteData = { ...dataKo, ...sharedFields };
       setDataEn(mergedEn);
       setDataKo(mergedKo);
@@ -293,14 +307,14 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       setDataKo(INITIAL_DATA_KO);
       localStorage.removeItem(MASTER_KEY_KO);
       localStorage.removeItem(STORAGE_KEY_KO);
-      localStorage.removeItem('xenians_site_data_ko_v30');
-      localStorage.removeItem('xenians_site_data_ko_v17');
+      localStorage.removeItem('xenians_site_data_ko_v34');
+      localStorage.removeItem('xenians_site_data_ko_v33');
     } else {
       setDataEn(INITIAL_DATA_EN);
       localStorage.removeItem(MASTER_KEY_EN);
       localStorage.removeItem(STORAGE_KEY_EN);
-      localStorage.removeItem('xenians_site_data_en_v30');
-      localStorage.removeItem('xenians_site_data_en_v17');
+      localStorage.removeItem('xenians_site_data_en_v34');
+      localStorage.removeItem('xenians_site_data_en_v33');
     }
   };
 
