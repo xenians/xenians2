@@ -258,22 +258,22 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               {/* Top Gold Accent Line */}
               <div className="h-[2.5px] w-full bg-gradient-to-r from-[#dfbe7a] via-[#c6a35b] to-[#dfbe7a]" />
 
-              <div className="max-w-7xl mx-auto px-6 sm:px-8 py-8 lg:py-10">
-                {/* Mega Menu Top Meta Header */}
-                <div className="flex items-center justify-between mb-6 pb-3 border-b border-black/10">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#c6a35b] shadow-xs" />
-                    <span className="font-mono text-[12px] tracking-[0.22em] text-[#9e7a32] font-extrabold uppercase">
+              <div className="max-w-6xl mx-auto px-5 sm:px-6 py-4 lg:py-4.5">
+                {/* Mega Menu Top Meta Header (Compact) */}
+                <div className="flex items-center justify-between mb-3 pb-2 border-b border-black/8">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#c6a35b] shadow-xs" />
+                    <span className="font-mono text-[11px] tracking-[0.2em] text-[#9e7a32] font-bold uppercase">
                       {lang === 'ko' ? '제니안스 핵심 비즈니스 플랫폼' : 'XENIANS CORE BUSINESS PLATFORM'}
                     </span>
                   </div>
-                  <span className="font-mono text-[11px] tracking-[0.16em] text-[#333333] uppercase font-bold bg-[#faf7f2] px-3 py-1 rounded-full border border-black/8">
+                  <span className="font-mono text-[10px] tracking-[0.14em] text-[#555555] uppercase font-semibold bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-black/6">
                     05 INTEGRATED SECTORS
                   </span>
                 </div>
 
-                {/* 5-Column Horizontal Layout (High Clarity & Visibility) */}
-                <div className="grid grid-cols-5 gap-4 lg:gap-5">
+                {/* 5-Column Horizontal Layout (Sleek Compact Cards) */}
+                <div className="grid grid-cols-5 gap-2.5 lg:gap-3.5">
                   {businessDivisions.map((div, idx) => {
                     const DivIcon = div.icon;
                     const isDivActive = location.pathname === div.path;
@@ -287,54 +287,54 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                         to={div.path}
                         onClick={handleNavClick}
                         className={cn(
-                          "group relative p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between border",
+                          "group relative p-3 sm:p-3.5 rounded-xl transition-all duration-300 flex flex-col justify-between border",
                           isDivActive
-                            ? "bg-[#faf6ee] border-[#c6a35b] shadow-md ring-1 ring-[#c6a35b]/40"
-                            : "bg-[#ffffff] hover:bg-[#faf7f2] border-black/10 hover:border-[#c6a35b] hover:shadow-[0_16px_36px_-8px_rgba(198,163,91,0.28)] hover:-translate-y-1.5"
+                            ? "bg-[#faf6ee] border-[#c6a35b] shadow-xs ring-1 ring-[#c6a35b]/30"
+                            : "bg-[#ffffff] hover:bg-[#faf7f2] border-black/8 hover:border-[#c6a35b] hover:shadow-[0_8px_20px_-4px_rgba(198,163,91,0.22)] hover:-translate-y-1"
                         )}
                       >
                         <div>
                           {/* Icon + Number Header */}
-                          <div className="flex items-center justify-between mb-3.5">
+                          <div className="flex items-center justify-between mb-2">
                             <div className={cn(
-                              "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 border shrink-0",
+                              "w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-300 border shrink-0",
                               isDivActive 
                                 ? "bg-[#9e7a32] text-white border-[#9e7a32] shadow-xs" 
-                                : "bg-[#faf7f2] text-[#9e7a32] border-[#c6a35b]/30 group-hover:bg-[#9e7a32] group-hover:text-white group-hover:border-[#9e7a32]"
+                                : "bg-[#faf7f2] text-[#9e7a32] border-[#c6a35b]/25 group-hover:bg-[#9e7a32] group-hover:text-white group-hover:border-[#9e7a32]"
                             )}>
-                              <DivIcon className="w-5 h-5" />
+                              <DivIcon className="w-3.5 h-3.5" />
                             </div>
 
                             <span className={cn(
-                              "font-mono text-[14px] font-extrabold tracking-wider transition-colors",
+                              "font-mono text-[11px] font-bold tracking-wider transition-colors",
                               isDivActive ? "text-[#9e7a32]" : "text-[#9e7a32] group-hover:text-[#7d5f22]"
                             )}>
                               {numStr}
                             </span>
                           </div>
 
-                          {/* Sector Title - Large & Bold */}
+                          {/* Sector Title */}
                           <h3 className={cn(
-                            "font-sans text-[17px] xl:text-[18px] font-extrabold tracking-tight mb-2 transition-colors leading-snug",
+                            "font-sans text-[13.5px] xl:text-[14.5px] font-bold tracking-tight mb-1 transition-colors leading-snug truncate",
                             isDivActive ? "text-[#9e7a32]" : "text-[#111111] group-hover:text-[#9e7a32]"
                           )}>
                             {lang === 'ko' ? titleKo : titleEn}
                           </h3>
 
-                          {/* Sector Sub-Summary - Clear & Highly Readable */}
-                          <p className="font-sans text-[12.5px] xl:text-[13px] font-medium text-[#444444] leading-relaxed line-clamp-2">
+                          {/* Sector Sub-Summary */}
+                          <p className="font-sans text-[11px] xl:text-[11.5px] font-normal text-[#555555] leading-relaxed line-clamp-1">
                             {lang === 'ko' ? div.subKo : div.subEn}
                           </p>
                         </div>
 
                         {/* Bottom Action Line */}
-                        <div className="mt-5 pt-3 border-t border-black/[0.08] flex items-center justify-between">
+                        <div className="mt-2.5 pt-2 border-t border-black/[0.06] flex items-center justify-between">
                           <span className={cn(
-                            "font-mono text-[11px] font-extrabold tracking-wider uppercase transition-colors flex items-center gap-1",
-                            isDivActive ? "text-[#9e7a32]" : "text-[#111111] group-hover:text-[#9e7a32]"
+                            "font-mono text-[10px] font-bold tracking-wider uppercase transition-colors flex items-center gap-1",
+                            isDivActive ? "text-[#9e7a32]" : "text-[#222222] group-hover:text-[#9e7a32]"
                           )}>
                             <span>{lang === 'ko' ? '상세보기' : 'EXPLORE'}</span>
-                            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                           </span>
                         </div>
                       </Link>
@@ -342,9 +342,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   })}
                 </div>
 
-                {/* Bottom Full Navigation Link */}
-                <div className="mt-6 pt-4 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <span className="text-[13px] font-medium text-[#333333]">
+                {/* Bottom Full Navigation Link (Compact) */}
+                <div className="mt-3 pt-2.5 border-t border-black/8 flex flex-col sm:flex-row items-center justify-between gap-2">
+                  <span className="text-[12px] font-normal text-[#555555]">
                     {lang === 'ko' 
                       ? '기획, 투자, 금융자문부터 위탁운영까지 자산 가치를 극대화하는 종합 솔루션을 제공합니다.' 
                       : 'Comprehensive end-to-end asset lifecycle solutions from advisory to turnkey operations.'}
@@ -352,10 +352,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   <Link
                     to="/business"
                     onClick={handleNavClick}
-                    className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.16em] text-[#111111] hover:text-[#9e7a32] font-extrabold uppercase bg-[#faf7f2] hover:bg-[#f3ece0] px-4 py-2 rounded-full border border-black/10 hover:border-[#c6a35b] transition-all shrink-0"
+                    className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.14em] text-[#111111] hover:text-[#9e7a32] font-bold uppercase bg-[#faf7f2] hover:bg-[#f3ece0] px-3 py-1 rounded-full border border-black/10 hover:border-[#c6a35b] transition-all shrink-0"
                   >
-                    <span>{lang === 'ko' ? '비즈니스 전체 개요 보기' : 'VIEW COMPLETE OVERVIEW'}</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <span>{lang === 'ko' ? '비즈니스 전체 개요' : 'VIEW OVERVIEW'}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>

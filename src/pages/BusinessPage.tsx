@@ -734,27 +734,27 @@ export const BusinessPage: React.FC = () => {
                     key={div.id}
                     onMouseEnter={() => setHoveredMenu(div.id)}
                     onClick={() => handleTabChange(div.id)}
-                    className={`group cursor-pointer relative w-full text-left py-3.5 px-4 rounded-xs transition-all duration-300 flex items-center justify-between border-t-0 border-r-0 border-l-[3px] border-b-[2.5px] overflow-hidden ${
+                    className={`group cursor-pointer relative w-full text-left py-2 px-3 sm:py-2.5 sm:px-3.5 rounded-xs transition-all duration-300 flex items-center justify-between border-t-0 border-r-0 border-l-[3px] border-b-[2px] overflow-hidden ${
                       isDimmed 
                         ? 'opacity-30 blur-[0.6px] scale-[0.985] bg-transparent border-l-transparent border-b-transparent' 
                         : isHovered || isActive
-                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-4px_8px_22px_rgba(198,163,91,0.25),0_10px_24px_rgba(0,0,0,0.06)] font-bold -translate-y-1 translate-x-1.5 z-10'
-                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-1 hover:translate-x-1.5 hover:shadow-[-4px_8px_22px_rgba(198,163,91,0.25)]'
+                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-3px_6px_16px_rgba(198,163,91,0.2),0_4px_12px_rgba(0,0,0,0.04)] font-bold -translate-y-0.5 translate-x-1 z-10'
+                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-0.5 hover:translate-x-1 hover:shadow-[-3px_6px_16px_rgba(198,163,91,0.2)]'
                     }`}
                   >
                     {/* Subtle Gold Shimmer Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#c6a35b]/[0.12] via-transparent to-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                    <div className="flex items-center gap-3.5 min-w-0 relative z-10 pl-1">
+                    <div className="flex items-center gap-2.5 min-w-0 relative z-10 pl-0.5">
                       <span
-                        className={`font-mono text-[12.5px] font-bold shrink-0 transition-colors duration-200 ${
+                        className={`font-mono text-[11.5px] font-bold shrink-0 transition-colors duration-200 ${
                           isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
                         }`}
                       >
                         {div.tabNumber}
                       </span>
                       <span
-                        className={`font-sans text-[14.5px] sm:text-[15px] tracking-tight truncate transition-colors duration-200 ${
+                        className={`font-sans text-[13.5px] sm:text-[14px] tracking-tight truncate transition-colors duration-200 ${
                           isActive || isHovered
                             ? 'font-bold text-[#111111]'
                             : 'font-medium text-[#333333] group-hover:text-[#111111] group-hover:font-bold'
@@ -764,13 +764,13 @@ export const BusinessPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="relative z-10 flex items-center pl-2 shrink-0">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    <div className="relative z-10 flex items-center pl-1.5 shrink-0">
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
                         isActive || isHovered
-                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-xs translate-x-0.5 scale-110' 
-                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-110 group-hover:translate-x-0.5'
+                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-2xs translate-x-0.5 scale-105' 
+                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-105 group-hover:translate-x-0.5'
                       }`}>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <ChevronRight className="w-3 h-3" />
                       </div>
                     </div>
                   </button>
@@ -833,29 +833,29 @@ export const BusinessPage: React.FC = () => {
                 return (
                   <div 
                     key={pIdx} 
-                    className={`group/card transition-all duration-300 rounded-xs border-t-0 border-r-0 border-l-[3.5px] border-b-[2.5px] overflow-hidden ${
+                    className={`group/card transition-all duration-300 rounded-xs border-t-0 border-r-0 border-l-[3px] border-b-[2px] overflow-hidden ${
                       isExpanded 
-                        ? 'bg-gradient-to-br from-[#1e1d1a] via-[#151413] to-[#0d0c0b] text-white border-l-[#dfbe7a] border-b-[#9e7a32] shadow-[-6px_10px_28px_rgba(0,0,0,0.35),0_12px_24px_rgba(198,163,91,0.2)] -translate-y-1 translate-x-1.5 p-5' 
-                        : 'bg-white text-[#111111] border-l-black/10 border-b-black/10 hover:bg-gradient-to-br hover:from-[#21201d] hover:via-[#161514] hover:to-[#0e0d0c] hover:text-white hover:border-l-[#dfbe7a] hover:border-b-[#9e7a32] hover:shadow-[-6px_10px_28px_rgba(0,0,0,0.3),0_12px_24px_rgba(198,163,91,0.2)] hover:-translate-y-1 hover:translate-x-1.5 p-4 sm:p-5'
+                        ? 'bg-gradient-to-br from-[#1e1d1a] via-[#151413] to-[#0d0c0b] text-white border-l-[#dfbe7a] border-b-[#9e7a32] shadow-[-4px_8px_20px_rgba(0,0,0,0.35),0_8px_16px_rgba(198,163,91,0.2)] -translate-y-0.5 translate-x-1 p-3.5 sm:p-4' 
+                        : 'bg-white text-[#111111] border-l-black/10 border-b-black/10 hover:bg-gradient-to-br hover:from-[#21201d] hover:via-[#161514] hover:to-[#0e0d0c] hover:text-white hover:border-l-[#dfbe7a] hover:border-b-[#9e7a32] hover:shadow-[-4px_8px_20px_rgba(0,0,0,0.3),0_8px_16px_rgba(198,163,91,0.2)] hover:-translate-y-0.5 hover:translate-x-1 py-2.5 px-3.5 sm:py-3 sm:px-4'
                     }`}
                   >
                     {/* Header / Click Trigger */}
                     <button
                       type="button"
                       onClick={() => setExpandedPointIdx(isExpanded ? null : pIdx)}
-                      className="w-full cursor-pointer flex items-start sm:items-center justify-between gap-4 text-left transition-colors"
+                      className="w-full cursor-pointer flex items-start sm:items-center justify-between gap-3 text-left transition-colors"
                       aria-expanded={isExpanded}
                     >
-                      <div className="flex items-start sm:items-center gap-3.5">
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 sm:mt-0 transition-all duration-300 ${
+                      <div className="flex items-start sm:items-center gap-3">
+                        <div className={`w-5.5 h-5.5 rounded-full flex items-center justify-center shrink-0 mt-0.5 sm:mt-0 transition-all duration-300 ${
                           isExpanded 
-                            ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-[0_0_14px_rgba(198,163,91,0.7)] scale-110' 
-                            : 'bg-black/[0.06] text-[#555555] group-hover/card:bg-gradient-to-br group-hover/card:from-[#dfbe7a] group-hover/card:via-[#c6a35b] group-hover/card:to-[#9e7a32] group-hover/card:text-white group-hover/card:shadow-[0_0_14px_rgba(198,163,91,0.7)] group-hover/card:scale-110'
+                            ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-[0_0_12px_rgba(198,163,91,0.7)] scale-105' 
+                            : 'bg-black/[0.06] text-[#555555] group-hover/card:bg-gradient-to-br group-hover/card:from-[#dfbe7a] group-hover/card:via-[#c6a35b] group-hover/card:to-[#9e7a32] group-hover/card:text-white group-hover/card:shadow-[0_0_12px_rgba(198,163,91,0.7)] group-hover/card:scale-105'
                         }`}>
-                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <CheckCircle2 className="w-3 h-3" />
                         </div>
                         <div>
-                          <span className={`font-sans text-[15.5px] sm:text-[16.5px] leading-snug transition-colors duration-300 ${
+                          <span className={`font-sans text-[14.5px] sm:text-[15px] leading-snug transition-colors duration-300 ${
                             isExpanded 
                               ? 'font-bold text-white' 
                               : 'font-semibold text-[#111111] group-hover/card:text-white group-hover/card:font-bold'
@@ -866,7 +866,7 @@ export const BusinessPage: React.FC = () => {
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0 ml-2">
-                        <span className={`hidden sm:inline-block text-[11.5px] font-sans font-medium transition-colors duration-300 ${
+                        <span className={`hidden sm:inline-block text-[11px] font-sans font-medium transition-colors duration-300 ${
                           isExpanded 
                             ? 'text-[#dfbe7a] font-bold' 
                             : 'text-[#777777] group-hover/card:text-[#dfbe7a] group-hover/card:font-semibold'
@@ -875,59 +875,59 @@ export const BusinessPage: React.FC = () => {
                             ? (lang === 'ko' ? '닫기' : 'Close') 
                             : (lang === 'ko' ? '상세보기' : 'View Detail')}
                         </span>
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        <div className={`w-5.5 h-5.5 rounded-full flex items-center justify-center transition-all duration-300 ${
                           isExpanded 
                             ? 'rotate-180 text-white bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-xs' 
                             : 'text-black/40 bg-black/[0.04] group-hover/card:bg-gradient-to-br group-hover/card:from-[#dfbe7a] group-hover/card:to-[#9e7a32] group-hover/card:text-white group-hover/card:rotate-90'
                         }`}>
-                          <ChevronDown className="w-4 h-4" />
+                          <ChevronDown className="w-3.5 h-3.5" />
                         </div>
                       </div>
                     </button>
 
                     {/* Expandable Explanation */}
                     {isExpanded && (
-                      <div className="pt-5 pb-1 animate-fadeIn border-t border-white/10 mt-4">
+                      <div className="pt-4 pb-1 animate-fadeIn border-t border-white/10 mt-3">
                         {/* Scope Narrative */}
-                        <div className="mb-5">
-                          <div className="flex items-center gap-2 mb-2">
+                        <div className="mb-4">
+                          <div className="flex items-center gap-2 mb-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#dfbe7a]" />
-                            <span className="text-[11px] font-mono tracking-[0.2em] text-[#dfbe7a] font-bold uppercase">
+                            <span className="text-[10.5px] font-mono tracking-[0.2em] text-[#dfbe7a] font-bold uppercase">
                               EXECUTION ROADMAP & METHODOLOGY
                             </span>
                           </div>
-                          <p className="font-sans text-[14.5px] sm:text-[15px] text-white/90 leading-[1.85] font-normal break-keep pl-3.5 border-l-2 border-[#dfbe7a]">
+                          <p className="font-sans text-[13.5px] sm:text-[14px] text-white/90 leading-[1.8] font-normal break-keep pl-3 border-l-2 border-[#dfbe7a]">
                             {lang === 'ko' ? pt.descKo : pt.descEn}
                           </p>
                         </div>
 
                         {/* Deliverables & Strategic Value Grid (Interactive Sub-Cards with Left/Bottom lines & Gradients) */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
                           {/* Deliverables */}
-                          <div className="p-4 rounded-xs border-t-0 border-r-0 border-l-2 border-b-2 border-l-[#dfbe7a] border-b-[#9e7a32] bg-gradient-to-br from-white/10 via-white/[0.05] to-transparent hover:bg-gradient-to-br hover:from-[#c6a35b]/30 hover:to-[#9e7a32]/20 hover:-translate-y-0.5 hover:translate-x-1 transition-all duration-300 flex items-start gap-3 group/sub">
-                            <div className="w-7 h-7 rounded-full bg-white/10 group-hover/sub:bg-gradient-to-br group-hover/sub:from-[#dfbe7a] group-hover/sub:to-[#9e7a32] text-[#dfbe7a] group-hover/sub:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
-                              <FileText className="w-3.5 h-3.5" />
+                          <div className="p-3 sm:p-3.5 rounded-xs border-t-0 border-r-0 border-l-2 border-b-2 border-l-[#dfbe7a] border-b-[#9e7a32] bg-gradient-to-br from-white/10 via-white/[0.05] to-transparent hover:bg-gradient-to-br hover:from-[#c6a35b]/30 hover:to-[#9e7a32]/20 hover:-translate-y-0.5 hover:translate-x-0.5 transition-all duration-300 flex items-start gap-2.5 group/sub">
+                            <div className="w-6 h-6 rounded-full bg-white/10 group-hover/sub:bg-gradient-to-br group-hover/sub:from-[#dfbe7a] group-hover/sub:to-[#9e7a32] text-[#dfbe7a] group-hover/sub:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+                              <FileText className="w-3 h-3" />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <span className="text-[10.5px] font-mono tracking-[0.15em] text-[#dfbe7a] font-bold uppercase block">
+                              <span className="text-[10px] font-mono tracking-[0.15em] text-[#dfbe7a] font-bold uppercase block">
                                 KEY DELIVERABLES
                               </span>
-                              <span className="font-sans text-[13.5px] sm:text-[14px] font-semibold text-white/95 leading-relaxed block mt-1">
+                              <span className="font-sans text-[13px] sm:text-[13.5px] font-semibold text-white/95 leading-relaxed block mt-0.5">
                                 {lang === 'ko' ? pt.deliverableKo : pt.deliverableEn}
                               </span>
                             </div>
                           </div>
 
                           {/* Strategic Value */}
-                          <div className="p-4 rounded-xs border-t-0 border-r-0 border-l-2 border-b-2 border-l-[#dfbe7a] border-b-[#9e7a32] bg-gradient-to-br from-white/10 via-white/[0.05] to-transparent hover:bg-gradient-to-br hover:from-[#c6a35b]/30 hover:to-[#9e7a32]/20 hover:-translate-y-0.5 hover:translate-x-1 transition-all duration-300 flex items-start gap-3 group/sub">
-                            <div className="w-7 h-7 rounded-full bg-white/10 group-hover/sub:bg-gradient-to-br group-hover/sub:from-[#dfbe7a] group-hover/sub:to-[#9e7a32] text-[#dfbe7a] group-hover/sub:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
-                              <TrendingUp className="w-3.5 h-3.5" />
+                          <div className="p-3 sm:p-3.5 rounded-xs border-t-0 border-r-0 border-l-2 border-b-2 border-l-[#dfbe7a] border-b-[#9e7a32] bg-gradient-to-br from-white/10 via-white/[0.05] to-transparent hover:bg-gradient-to-br hover:from-[#c6a35b]/30 hover:to-[#9e7a32]/20 hover:-translate-y-0.5 hover:translate-x-0.5 transition-all duration-300 flex items-start gap-2.5 group/sub">
+                            <div className="w-6 h-6 rounded-full bg-white/10 group-hover/sub:bg-gradient-to-br group-hover/sub:from-[#dfbe7a] group-hover/sub:to-[#9e7a32] text-[#dfbe7a] group-hover/sub:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+                              <TrendingUp className="w-3 h-3" />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <span className="text-[10.5px] font-mono tracking-[0.15em] text-[#dfbe7a] font-bold uppercase block">
+                              <span className="text-[10px] font-mono tracking-[0.15em] text-[#dfbe7a] font-bold uppercase block">
                                 STRATEGIC VALUE DRIVERS
                               </span>
-                              <span className="font-sans text-[13.5px] sm:text-[14px] font-semibold text-white/95 leading-relaxed block mt-1">
+                              <span className="font-sans text-[13px] sm:text-[13.5px] font-semibold text-white/95 leading-relaxed block mt-0.5">
                                 {lang === 'ko' ? pt.strategyKo : pt.strategyEn}
                               </span>
                             </div>
