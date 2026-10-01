@@ -129,9 +129,9 @@ export const PrivacyPage: React.FC = () => {
                 </h2>
                 <div className="bg-[#fbf9f4] p-5 rounded-xs border border-black/5 space-y-2">
                   <p className="font-bold text-[#141413]">XENIANS Inc. 개인정보 보호 담당 데스크</p>
-                  <p><span className="text-[#888888]">담당:</span> 준법지원팀 / 개인정보 관리책임자</p>
+                  <p><span className="text-[#888888]">담당:</span> 경영지원본부 / IT마케팅팀</p>
                   <p><span className="text-[#888888]">공식 이메일:</span> <a href="mailto:info@xenians.co.kr" className="text-[#a18750] font-mono hover:underline">info@xenians.co.kr</a></p>
-                  <p><span className="text-[#888888]">소재지:</span> 서울특별시 강남구 테헤란로 456 XENIANS Tower 15층</p>
+                  <p><span className="text-[#888888]">소재지:</span> 서울특별시 강남구 테헤란로79길 6 (6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea)</p>
                 </div>
               </section>
 
@@ -192,8 +192,9 @@ export const PrivacyPage: React.FC = () => {
                 </h2>
                 <div className="bg-[#fbf9f4] p-5 rounded-xs border border-black/5 space-y-2">
                   <p className="font-bold text-[#141413]">XENIANS Inc. Legal & Compliance Office</p>
+                  <p><span className="text-[#888888]">Department:</span> Management Support Div. / IT & Marketing Team</p>
                   <p><span className="text-[#888888]">Official Email:</span> <a href="mailto:info@xenians.co.kr" className="text-[#a18750] font-mono hover:underline">info@xenians.co.kr</a></p>
-                  <p><span className="text-[#888888]">Address:</span> 15F, XENIANS Tower, 456 Teheran-ro, Gangnam-gu, Seoul, Republic of Korea</p>
+                  <p><span className="text-[#888888]">Address:</span> 6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea</p>
                 </div>
               </section>
 

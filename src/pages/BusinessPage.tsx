@@ -713,12 +713,12 @@ export const BusinessPage: React.FC = () => {
           <div className="lg:col-span-4 lg:sticky lg:top-32 pr-0 lg:pr-4">
             <div className="mb-5 pb-3.5 border-b border-black/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-2xs shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#7c5816] shadow-2xs shrink-0" />
                 <span className="font-sans text-[13.5px] sm:text-[14.5px] font-bold text-[#1e3a8a] tracking-tight">
                   {lang === 'ko' ? '핵심 사업 영역' : 'BUSINESS SECTORS'}
                 </span>
               </div>
-              <span className="font-mono text-[11px] font-bold text-[#9e7a32] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
+              <span className="font-mono text-[11px] font-bold text-[#7c5816] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
                 0{divisions.length} {lang === 'ko' ? 'DIVISIONS' : 'DIVISIONS'}
               </span>
             </div>
@@ -741,8 +741,8 @@ export const BusinessPage: React.FC = () => {
                       isDimmed 
                         ? 'opacity-30 blur-[0.6px] scale-[0.985] bg-transparent border-l-transparent border-b-transparent' 
                         : isHovered || isActive
-                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-3px_6px_16px_rgba(198,163,91,0.2),0_4px_12px_rgba(0,0,0,0.04)] font-bold -translate-y-0.5 translate-x-1 z-10'
-                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-0.5 hover:translate-x-1 hover:shadow-[-3px_6px_16px_rgba(198,163,91,0.2)]'
+                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#7c5816] shadow-[-3px_6px_16px_rgba(198,163,91,0.2),0_4px_12px_rgba(0,0,0,0.04)] font-bold -translate-y-0.5 translate-x-1 z-10'
+                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#7c5816] hover:-translate-y-0.5 hover:translate-x-1 hover:shadow-[-3px_6px_16px_rgba(198,163,91,0.2)]'
                     }`}
                   >
                     {/* Subtle Gold Shimmer Gradient */}
@@ -751,7 +751,7 @@ export const BusinessPage: React.FC = () => {
                     <div className="flex items-center gap-2.5 min-w-0 relative z-10 pl-0.5">
                       <span
                         className={`font-mono text-[11.5px] font-bold shrink-0 transition-colors duration-200 ${
-                          isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
+                          isActive || isHovered ? 'text-[#7c5816]' : 'text-[#888888] group-hover:text-[#7c5816]'
                         }`}
                       >
                         {div.tabNumber}

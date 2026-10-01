@@ -67,30 +67,30 @@ export const HomePage: React.FC = () => {
   const insightArticles = [
     {
       tag: 'MARKET',
-      title: '2024년 글로벌 부동산 시장 전망',
-      enTitle: '2024 Global Real Estate Market Outlook',
-      date: '2024.04.30',
+      title: '2026년 글로벌 부동산 시장 전망',
+      enTitle: '2026 Global Real Estate Market Outlook',
+      date: '2026. 08. 28',
       image: '/images/hero-seoul-skyline.jpg',
     },
     {
       tag: 'INSIGHT',
       title: '오피스 자산의 가치 재정의',
       enTitle: 'Redefining Prime Office Asset Valuation',
-      date: '2024.04.15',
+      date: '2026.04.15',
       image: '/images/project-gangnam-tower.jpg',
     },
     {
       tag: 'PROJECT',
       title: 'ACRO SEOUL FOREST 개발 스토리',
       enTitle: 'The Making of ACRO SEOUL FOREST',
-      date: '2024.04.01',
+      date: '2026.04.01',
       image: '/images/project-acro-forest.jpg',
     },
     {
       tag: 'TREND',
       title: '호텔 시장의 새로운 기회',
       enTitle: 'New Investment Frontiers in Hospitality',
-      date: '2024.03.20',
+      date: '2026.03.20',
       image: '/images/project-jeju-resort.jpg',
     },
   ];
@@ -159,10 +159,10 @@ export const HomePage: React.FC = () => {
           
           {/* Header */}
           <div className="mb-8 sm:mb-12 md:mb-14">
-            <span className="text-[10px] sm:text-[10.5px] font-mono tracking-[0.25em] sm:tracking-[0.3em] text-[#a18750] font-bold uppercase block mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-[10.5px] font-mono tracking-[0.25em] sm:tracking-[0.3em] text-[#7c5816] font-bold uppercase block mb-1.5 sm:mb-2">
               OUR BUSINESS
             </span>
-            <h2 className="font-serif text-[22px] sm:text-[30px] md:text-[38px] text-[#9e7a32] font-medium tracking-tight">
+            <h2 className="font-serif text-[22px] sm:text-[30px] md:text-[38px] text-[#7c5816] font-medium tracking-tight">
               {lang === 'ko' ? '전문성과 실행력으로 가치를 완성합니다.' : 'Completing Value with Deep Expertise & Execution.'}
             </h2>
           </div>
@@ -185,7 +185,7 @@ export const HomePage: React.FC = () => {
                   <div>
                     {/* Top: Number & Icon */}
                     <div className="flex items-center justify-between mb-3 sm:mb-6">
-                      <span className="font-mono text-[10px] sm:text-[11px] tracking-widest text-[#888888] group-hover:text-[#c6a35b] font-bold transition-colors">
+                      <span className="font-mono text-[10px] sm:text-[11px] tracking-widest text-[#888888] group-hover:text-[#7c5816] font-bold transition-colors">
                         {svc.num}
                       </span>
                       <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-sm bg-black/[0.04] flex items-center justify-center text-[#141413] group-hover:bg-[#141413] group-hover:text-[#c6a35b] group-hover:shadow-xs transition-all duration-300">
@@ -194,7 +194,7 @@ export const HomePage: React.FC = () => {
                     </div>
 
                     {/* Title inside Card Box: High-Contrast Prestige Gold */}
-                    <h3 className="font-sans font-bold text-[12.5px] sm:text-[14px] md:text-[15px] text-[#9e7a32] uppercase tracking-wider mb-1 sm:mb-2.5 leading-snug group-hover:text-[#b88c3a] transition-colors">
+                    <h3 className="font-sans font-bold text-[12.5px] sm:text-[14px] md:text-[15px] text-[#7c5816] uppercase tracking-wider mb-1 sm:mb-2.5 leading-snug group-hover:text-[#a07422] transition-colors">
                       {lang === 'ko' ? svc.titleKo : svc.title}
                     </h3>
 
@@ -289,17 +289,17 @@ export const HomePage: React.FC = () => {
           {/* Header & View All Link */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 pb-6 border-b border-black/[0.08]">
             <div>
-              <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#a18750] font-bold uppercase block mb-2">
+              <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#7c5816] font-bold uppercase block mb-2">
                 INSIGHTS
               </span>
-              <h2 className="font-serif text-[28px] sm:text-[34px] text-[#9e7a32] font-medium">
+              <h2 className="font-serif text-[28px] sm:text-[34px] text-[#7c5816] font-medium">
                 {lang === 'ko' ? '시장의 인사이트와 XENIANS의 시선을 전합니다.' : 'Market Insights & Perspectives from XENIANS.'}
               </h2>
             </div>
 
             <Link
               to="/insights"
-              className="group inline-flex items-center gap-2 px-4 py-2 border border-black/20 text-[#141413] hover:border-[#a18750] hover:text-[#a18750] font-mono text-[11px] tracking-widest uppercase rounded-sm transition-colors shrink-0"
+              className="group inline-flex items-center gap-2 px-4 py-2 border border-black/20 text-[#141413] hover:border-[#7c5816] hover:text-[#7c5816] font-mono text-[11px] tracking-widest uppercase rounded-sm transition-colors shrink-0"
             >
               <span>{lang === 'ko' ? '전체보기' : 'VIEW ALL'}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -331,7 +331,7 @@ export const HomePage: React.FC = () => {
 
                 {/* Content Directly on Background - Title in High-Contrast Prestige Gold */}
                 <div className="pt-4 flex flex-col justify-between flex-grow">
-                  <h3 className="font-sans font-bold text-[15px] text-[#9e7a32] group-hover:text-[#b88c3a] transition-colors line-clamp-2 leading-snug mb-2.5">
+                  <h3 className="font-sans font-bold text-[15px] text-[#7c5816] group-hover:text-[#a07422] transition-colors line-clamp-2 leading-snug mb-2.5">
                     {lang === 'ko' ? art.title : art.enTitle}
                   </h3>
                   <span className="font-mono text-[11px] text-[#888888]">

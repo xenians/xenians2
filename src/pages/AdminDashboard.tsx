@@ -1293,13 +1293,13 @@ export const AdminDashboard: React.FC = () => {
                                 🇰🇷 서울 본사 - 한국어 정보
                               </div>
                               {renderField(
-                                "서울 본사 표시명 (한국어)", 
-                                localData.contactInfo?.seoulTitleKo || '서울 본사', 
+                                "서울 표시명 (한국어)", 
+                                localData.contactInfo?.seoulTitleKo || '서울', 
                                 "contactInfo.seoulTitleKo"
                               )}
                               {renderField(
                                 "서울 주소 (한국어)", 
-                                localData.contactInfo?.seoulAddressKo || '서울특별시 강남구 테헤란로 456 XENIANS Tower 15층', 
+                                localData.contactInfo?.seoulAddressKo || '서울특별시 강남구 테헤란로 79길 6 JS타워', 
                                 "contactInfo.seoulAddressKo"
                               )}
                               {renderField(
@@ -1313,16 +1313,16 @@ export const AdminDashboard: React.FC = () => {
                           {(contactLangFilter === 'ALL' || contactLangFilter === 'EN') && (
                             <div className="space-y-4 bg-black/20 p-4 rounded-lg border border-[#c6a35b]/20">
                               <div className="font-bold text-xs text-[#c6a35b] flex items-center gap-1.5">
-                                🇺🇸 서울 본사 - 영어 정보 (English Version)
+                                🇺🇸 서울 - 영어 정보 (English Version)
                               </div>
                               {renderField(
-                                "Seoul HQ Display Title (English)", 
+                                "Seoul Display Title (English)", 
                                 localData.contactInfo?.seoulTitleEn || 'Seoul HQ', 
                                 "contactInfo.seoulTitleEn"
                               )}
                               {renderField(
                                 "Seoul Address (English)", 
-                                localData.contactInfo?.seoulAddressEn || '15F, XENIANS Tower, 456 Teheran-ro, Gangnam-gu, Seoul, Republic of Korea', 
+                                localData.contactInfo?.seoulAddressEn || 'XENIANS JSTower, 6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea', 
                                 "contactInfo.seoulAddressEn"
                               )}
                               {renderField(
@@ -1336,12 +1336,12 @@ export const AdminDashboard: React.FC = () => {
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
                             {renderField(
                               "네이버 지도 링크 URL (공통)", 
-                              localData.contactInfo?.seoulNaverMapUrl || 'https://map.naver.com/v5/search/%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20456', 
+                              localData.contactInfo?.seoulNaverMapUrl || 'https://map.naver.com/v5/search/%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C79%EA%B8%B8%206', 
                               "contactInfo.seoulNaverMapUrl"
                             )}
                             {renderField(
                               "구글 지도 링크 URL (공통)", 
-                              localData.contactInfo?.seoulGoogleMapUrl || 'https://maps.google.com/?q=456+Teheran-ro,+Gangnam-gu,+Seoul', 
+                              localData.contactInfo?.seoulGoogleMapUrl || 'https://maps.google.com/?q=6+79gil,+Teheran-ro,+Gangnam-gu,+Seoul,+Republic+of+Korea', 
                               "contactInfo.seoulGoogleMapUrl"
                             )}
                           </div>
@@ -1360,7 +1360,7 @@ export const AdminDashboard: React.FC = () => {
                             {(contactLangFilter === 'ALL' || contactLangFilter === 'KO') && (
                               renderField(
                                 "런던 오피스 표시명 (한국어)", 
-                                localData.contactInfo?.londonTitleKo || '런던 오피스', 
+                                localData.contactInfo?.londonTitleKo || '런던', 
                                 "contactInfo.londonTitleKo"
                               )
                             )}
@@ -1392,7 +1392,7 @@ export const AdminDashboard: React.FC = () => {
                             {(contactLangFilter === 'ALL' || contactLangFilter === 'KO') && (
                               renderField(
                                 "싱가포르 오피스 표시명 (한국어)", 
-                                localData.contactInfo?.singaporeTitleKo || '싱가포르 오피스', 
+                                localData.contactInfo?.singaporeTitleKo || '싱가포르', 
                                 "contactInfo.singaporeTitleKo"
                               )
                             )}

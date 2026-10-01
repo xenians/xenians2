@@ -38,18 +38,22 @@ export const ContactPage: React.FC = () => {
 
   const rawContact = data.contactInfo || {};
   const contactData = {
-    seoulAddressKo: rawContact.seoulAddressKo || '서울특별시 강남구 테헤란로 456 XENIANS Tower 15층',
-    seoulAddressEn: rawContact.seoulAddressEn || '15F, XENIANS Tower, 456 Teheran-ro, Gangnam-gu, Seoul, Republic of Korea',
+    seoulAddressKo: rawContact.seoulAddressKo || '서울특별시 강남구 테헤란로 79길 6 JS타워',
+    seoulAddressEn: (rawContact.seoulAddressEn || 'XENIANS JSTower, 6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea').replace(/^,\s*/, ''),
     seoulTransportKo: rawContact.seoulTransportKo || '선릉역 1번 출구 (도보 3분) / 삼성역 4번 출구 (도보 5분)',
     seoulTransportEn: rawContact.seoulTransportEn || 'Seolleung Station Exit 1 (3-min walk) / Samseong Station Exit 4 (5-min walk)',
-    seoulNaverMapUrl: rawContact.seoulNaverMapUrl || 'https://map.naver.com/v5/search/%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20456',
-    seoulGoogleMapUrl: rawContact.seoulGoogleMapUrl || 'https://maps.google.com/?q=456+Teheran-ro,+Gangnam-gu,+Seoul',
-    seoulTitleKo: rawContact.seoulTitleKo || '서울 본사',
+    seoulNaverMapUrl: rawContact.seoulNaverMapUrl && !rawContact.seoulNaverMapUrl.includes('456')
+      ? rawContact.seoulNaverMapUrl
+      : 'https://map.naver.com/v5/search/%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C79%EA%B8%B8%206',
+    seoulGoogleMapUrl: rawContact.seoulGoogleMapUrl && !rawContact.seoulGoogleMapUrl.includes('456')
+      ? rawContact.seoulGoogleMapUrl
+      : 'https://maps.google.com/?q=6+79gil,+Teheran-ro,+Gangnam-gu,+Seoul,+Republic+of+Korea',
+    seoulTitleKo: (rawContact.seoulTitleKo === '서울 본사' ? '서울' : rawContact.seoulTitleKo) || '서울',
     seoulTitleEn: rawContact.seoulTitleEn || 'Seoul HQ',
-    londonTitleKo: rawContact.londonTitleKo || '런던 오피스',
+    londonTitleKo: (rawContact.londonTitleKo === '런던 오피스' ? '런던' : rawContact.londonTitleKo) || '런던',
     londonTitleEn: rawContact.londonTitleEn || 'London',
     londonAddress: rawContact.londonAddress || 'Tower 42, 25 Old Broad St, London EC2N 1HN, United Kingdom',
-    singaporeTitleKo: rawContact.singaporeTitleKo || '싱가포르 오피스',
+    singaporeTitleKo: (rawContact.singaporeTitleKo === '싱가포르 오피스' ? '싱가포르' : rawContact.singaporeTitleKo) || '싱가포르',
     singaporeTitleEn: rawContact.singaporeTitleEn || 'Singapore',
     singaporeAddress: rawContact.singaporeAddress || '7 Straits View, Marina One East Tower #12-01, Singapore 018936',
     email: (rawContact.email && !rawContact.email.includes('xenians.com'))
@@ -251,7 +255,7 @@ ${formState.message || '-'}
             <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-[#c6a35b] uppercase block mb-3">
               {lang === 'ko' ? (contactData.locationsSubtitleKo || 'GLOBAL LOCATIONS') : (contactData.locationsSubtitleEn || 'GLOBAL LOCATIONS')}
             </span>
-            <h2 className="font-serif text-[30px] sm:text-[36px] text-[#9e7a32] font-bold">
+            <h2 className="font-serif text-[30px] sm:text-[36px] text-[#7c5816] font-bold">
               {lang === 'ko' ? (contactData.locationsTitleKo || '글로벌 오피스 안내') : (contactData.locationsTitleEn || 'Global Locations & Offices')}
             </h2>
             <div className="h-0.5 w-16 bg-[#c6a35b] mx-auto mt-4" />
@@ -268,7 +272,7 @@ ${formState.message || '-'}
                     <span className="w-8 h-8 rounded-full bg-[#141413] text-[#c6a35b] flex items-center justify-center font-bold text-xs">
                       SEOUL
                     </span>
-                    <h3 className="font-serif text-[20px] font-bold text-[#9e7a32]">
+                    <h3 className="font-serif text-[20px] font-bold text-[#7c5816]">
                       {lang === 'ko' ? (contactData.seoulTitleKo || '서울') : (contactData.seoulTitleEn || 'Seoul HQ')}
                     </h3>
                   </div>
@@ -285,7 +289,7 @@ ${formState.message || '-'}
                       <p className="text-[#141413] font-medium leading-relaxed break-keep">
                         {lang === 'ko' 
                           ? contactData.seoulAddressKo 
-                          : (contactData.seoulAddressEn || '15F, XENIANS Tower, 456 Teheran-ro, Gangnam-gu, Seoul, Republic of Korea')}
+                          : (contactData.seoulAddressEn || 'XENIANS JSTower, 6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea')}
                       </p>
                     </div>
                   </div>
@@ -337,7 +341,7 @@ ${formState.message || '-'}
                     <span className="w-8 h-8 rounded-full bg-[#141413] text-[#c6a35b] flex items-center justify-center font-bold text-xs">
                       LDN
                     </span>
-                    <h3 className="font-serif text-[20px] font-bold text-[#9e7a32]">
+                    <h3 className="font-serif text-[20px] font-bold text-[#7c5816]">
                       {lang === 'ko' ? (contactData.londonTitleKo || '런던') : (contactData.londonTitleEn || 'London')}
                     </h3>
                   </div>
@@ -380,7 +384,7 @@ ${formState.message || '-'}
                     <span className="w-8 h-8 rounded-full bg-[#141413] text-[#c6a35b] flex items-center justify-center font-bold text-xs">
                       SGP
                     </span>
-                    <h3 className="font-serif text-[20px] font-bold text-[#9e7a32]">
+                    <h3 className="font-serif text-[20px] font-bold text-[#7c5816]">
                       {lang === 'ko' ? (contactData.singaporeTitleKo || '싱가포르') : (contactData.singaporeTitleEn || 'Singapore')}
                     </h3>
                   </div>
@@ -429,7 +433,7 @@ ${formState.message || '-'}
             <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-[#c6a35b] uppercase block mb-3">
               {lang === 'ko' ? (contactData.inquirySubtitleKo || 'EMAIL INQUIRY') : (contactData.inquirySubtitleEn || 'EMAIL INQUIRY')}
             </span>
-            <h2 className="font-serif text-[28px] sm:text-[34px] text-[#9e7a32] font-bold mb-4">
+            <h2 className="font-serif text-[28px] sm:text-[34px] text-[#7c5816] font-bold mb-4">
               {lang === 'ko' ? (contactData.inquiryTitleKo || '이메일 문의 접수') : (contactData.inquiryTitleEn || 'Send an Email Inquiry')}
             </h2>
             <p className="text-[14px] text-[#666666] leading-relaxed break-keep">
@@ -450,7 +454,7 @@ ${formState.message || '-'}
                   <span className="font-mono text-[12px] font-bold text-[#a18750] tracking-widest uppercase">
                     INQUIRY RECEIVED
                   </span>
-                  <h3 className="font-serif text-[24px] sm:text-[28px] font-bold text-[#9e7a32]">
+                  <h3 className="font-serif text-[24px] sm:text-[28px] font-bold text-[#7c5816]">
                     {lang === 'ko' ? (contactData.successTitleKo || '문의가 성공적으로 접수되었습니다.') : (contactData.successTitleEn || 'Your inquiry has been submitted.')}
                   </h3>
                   <p className="text-[14px] text-[#666666] max-w-md mx-auto leading-relaxed">

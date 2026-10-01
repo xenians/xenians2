@@ -129,7 +129,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             >
               XENIANS GROUP
             </span>
-            <span className="font-mono text-[7px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.05em] sm:tracking-[0.12em] text-[#a18750] font-bold uppercase mt-1 sm:mt-1.5 leading-none truncate">
+            <span className="font-sans text-[7.5px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.04em] sm:tracking-[0.08em] text-[#c6a35b] font-bold uppercase mt-1 sm:mt-1.5 leading-none whitespace-nowrap">
               Real Estate Advisory & Management Group
             </span>
           </div>
@@ -263,8 +263,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 <div className="flex items-center justify-between mb-3 pb-2 border-b border-black/8">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#c6a35b] shadow-xs" />
-                    <span className="font-mono text-[11px] tracking-[0.2em] text-[#9e7a32] font-bold uppercase">
-                      {lang === 'ko' ? '제니안스 핵심 비즈니스 플랫폼' : 'XENIANS CORE BUSINESS PLATFORM'}
+                    <span className="font-mono text-[11px] tracking-[0.2em] text-[#7c5816] font-bold uppercase">
+                      {lang === 'ko' ? '제니안스 핵심 비즈니스' : 'XENIANS CORE BUSINESS'}
                     </span>
                   </div>
                   <span className="font-mono text-[10px] tracking-[0.14em] text-[#555555] uppercase font-semibold bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-black/6">
@@ -480,11 +480,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* FOOTER (Exact Layout from Reference Image) */}
       <footer className="bg-[#0f0f0e] text-[#ffffff]/70 border-t border-white/10 pt-16 pb-12 px-6 md:px-[6vw]">
         <div className="max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-white/10">
-          {/* Left: Emblem & Brand Wordmark */}
+          {/* Left: Emblem & Brand Wordmark with Subtitle right below 2nd logo */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              <Link to="/" onClick={handleNavClick} className="inline-flex items-center gap-4 sm:gap-4.5 md:gap-5 group">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <div className="flex items-center gap-3.5 sm:gap-4 md:gap-5">
+                {/* 1st Logo: Emblem */}
+                <Link to="/" onClick={handleNavClick} className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 flex items-center justify-center transition-transform duration-300 hover:scale-105">
                   <img 
                     src="/images/logo.png" 
                     alt="Xenians Group Emblem" 
@@ -493,27 +494,24 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                       (e.target as HTMLImageElement).src = "/images/로고.png";
                     }}
                   />
-                </div>
-                <div className="flex items-center">
-                  <img 
-                    src="/images/로고3.png" 
-                    alt="XENIANS GROUP" 
-                    className="h-8 sm:h-9 md:h-10 w-auto object-contain shrink-0"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "/images/xenians-logo.png";
-                    }}
-                  />
-                </div>
-              </Link>
+                </Link>
 
-              {/* Slogan & Group Title under the bottom left logo */}
-              <div className="mt-3.5 pl-0.5 space-y-1">
-                <p className="font-sans text-[12px] sm:text-[13px] tracking-[0.14em] text-[#dfbe7a] font-semibold select-none opacity-95">
-                  Value-Driven, Result-Oriented
-                </p>
-                <p className="font-mono text-[9px] sm:text-[10px] md:text-[10.5px] tracking-[0.05em] sm:tracking-[0.12em] text-[#dfbe7a]/90 font-bold uppercase select-none">
-                  Real Estate Advisory & Management Group
-                </p>
+                {/* 2nd Logo & Subtitle directly below it */}
+                <div className="flex flex-col justify-center min-w-0">
+                  <Link to="/" onClick={handleNavClick} className="inline-block transition-transform duration-300 hover:scale-102">
+                    <img 
+                      src="/images/로고3.png" 
+                      alt="XENIANS GROUP" 
+                      className="h-9 sm:h-10.5 md:h-12 w-auto object-contain shrink-0"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "/images/xenians-logo.png";
+                      }}
+                    />
+                  </Link>
+                  <p className="font-sans text-[7.5px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.03em] sm:tracking-[0.06em] text-[#c6a35b] font-bold uppercase mt-1.5 leading-none whitespace-nowrap select-none">
+                    Real Estate Advisory & Management Group
+                  </p>
+                </div>
               </div>
             </div>
           </div>

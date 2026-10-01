@@ -242,9 +242,9 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                     </h3>
                     <div className="bg-white/[0.03] border border-white/10 p-4 rounded-xs text-[12.5px] space-y-1.5">
                       <p className="font-semibold text-[#c6a35b]">XENIANS Inc. 개인정보 보호 담당 부서</p>
-                      <p><span className="text-white/50">부서명:</span> 운영총괄실 / 준법지원부</p>
+                      <p><span className="text-white/50">부서명:</span> 경영지원본부 / IT마케팅팀</p>
                       <p><span className="text-white/50">공식 이메일:</span> <a href="mailto:info@xenians.co.kr" className="text-[#dfbe7a] hover:underline font-mono">info@xenians.co.kr</a></p>
-                      <p><span className="text-white/50">소재지:</span> 서울특별시 강남구 테헤란로 456 XENIANS Tower 15층</p>
+                      <p><span className="text-white/50">소재지:</span> 서울특별시 강남구 테헤란로79길 6 (6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea)</p>
                     </div>
                   </section>
 
@@ -353,9 +353,9 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({
                     </h3>
                     <div className="bg-white/[0.03] border border-white/10 p-4 rounded-xs text-[12.5px] space-y-1.5">
                       <p className="font-semibold text-[#c6a35b]">XENIANS Inc. Compliance & Data Protection Office</p>
-                      <p><span className="text-white/50">Department:</span> Executive Operations & Legal Compliance</p>
+                      <p><span className="text-white/50">Department:</span> Management Support Div. / IT & Marketing Team</p>
                       <p><span className="text-white/50">Official Email:</span> <a href="mailto:info@xenians.co.kr" className="text-[#dfbe7a] hover:underline font-mono">info@xenians.co.kr</a></p>
-                      <p><span className="text-white/50">Headquarters:</span> 15F, XENIANS Tower, 456 Teheran-ro, Gangnam-gu, Seoul, Republic of Korea</p>
+                      <p><span className="text-white/50">Headquarters:</span> 6 79gil, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea</p>
                     </div>
                   </section>
 

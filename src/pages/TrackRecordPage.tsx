@@ -141,12 +141,12 @@ export const TrackRecordPage: React.FC = () => {
             <div className="lg:col-span-3 pr-0 lg:pr-3">
               <div className="mb-5 pb-3.5 border-b border-black/10 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-2xs shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#7c5816] shadow-2xs shrink-0" />
                   <span className="font-sans text-[13.5px] sm:text-[14.5px] font-bold text-[#1e3a8a] tracking-tight">
                     {listTitle}
                   </span>
                 </div>
-                <span className="font-mono text-[11px] font-bold text-[#9e7a32] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
+                <span className="font-mono text-[11px] font-bold text-[#7c5816] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
                   {String(projects.length).padStart(2, '0')} PROJECTS
                 </span>
               </div>
@@ -180,8 +180,8 @@ export const TrackRecordPage: React.FC = () => {
                         isDimmed
                           ? 'opacity-30 blur-[0.6px] scale-[0.985] bg-transparent border-l-transparent border-b-transparent'
                           : isHovered || isActive
-                            ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-4px_6px_20px_rgba(198,163,91,0.22),0_8px_20px_rgba(0,0,0,0.05)] font-bold -translate-y-1 translate-x-1.5 z-10'
-                            : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-1 hover:translate-x-1.5 hover:shadow-[-4px_6px_20px_rgba(198,163,91,0.22)]'
+                            ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#7c5816] shadow-[-4px_6px_20px_rgba(198,163,91,0.22),0_8px_20px_rgba(0,0,0,0.05)] font-bold -translate-y-1 translate-x-1.5 z-10'
+                            : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#7c5816] hover:-translate-y-1 hover:translate-x-1.5 hover:shadow-[-4px_6px_20px_rgba(198,163,91,0.22)]'
                       }`}
                     >
                       {/* Subtle Gold Shimmer Gradient */}
@@ -190,7 +190,7 @@ export const TrackRecordPage: React.FC = () => {
                       <div className="flex items-center gap-3 pl-1 truncate relative z-10">
                         <span
                           className={`font-mono text-[12px] font-bold transition-colors duration-200 shrink-0 ${
-                            isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
+                            isActive || isHovered ? 'text-[#7c5816]' : 'text-[#888888] group-hover:text-[#7c5816]'
                           }`}
                         >
                           {displayNum}
@@ -209,8 +209,8 @@ export const TrackRecordPage: React.FC = () => {
                       <div className="relative z-10 flex items-center pl-2 shrink-0">
                         <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
                           isActive || isHovered
-                            ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-xs scale-110' 
-                            : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-110'
+                            ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#7c5816] text-white shadow-xs scale-110' 
+                            : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#7c5816] group-hover:text-white group-hover:scale-110'
                         }`}>
                           <ChevronRight className="w-3 h-3" />
                         </div>
@@ -245,7 +245,7 @@ export const TrackRecordPage: React.FC = () => {
               <div>
                 {/* Title and Description */}
                 <div className="mb-5 pb-4 border-b border-black/[0.08]">
-                  <h2 className="font-serif text-[24px] sm:text-[28px] text-[#9e7a32] font-bold tracking-tight leading-tight">
+                  <h2 className="font-serif text-[24px] sm:text-[28px] text-[#7c5816] font-bold tracking-tight leading-tight">
                     {getProjectTitle(current)}
                   </h2>
                   {getProjectSubtitle(current) && (
@@ -300,7 +300,7 @@ export const TrackRecordPage: React.FC = () => {
               <div className="mt-8 pt-6 border-t border-black/[0.08] flex items-center justify-between">
                 <button
                   onClick={() => setSelectedModalProject(current)}
-                  className="cursor-pointer px-6 py-3 bg-[#141413] hover:bg-[#a18750] text-white font-mono text-[11px] tracking-[0.2em] uppercase rounded-sm transition-all duration-300 font-bold"
+                  className="cursor-pointer px-6 py-3 bg-[#141413] hover:bg-[#7c5816] text-white font-mono text-[11px] tracking-[0.2em] uppercase rounded-sm transition-all duration-300 font-bold"
                 >
                   {viewDetailBtnText}
                 </button>
@@ -335,7 +335,7 @@ export const TrackRecordPage: React.FC = () => {
 
           {/* 3. BOTTOM THUMBNAILS ROW */}
           <div className="mt-12 pt-8 border-t border-black/[0.08]">
-            <span className="font-sans text-[13px] sm:text-[14px] font-bold text-[#a18750] tracking-tight block mb-3.5">
+            <span className="font-sans text-[13px] sm:text-[14px] font-bold text-[#7c5816] tracking-tight block mb-3.5">
               {galleryTitle}
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2.5 sm:gap-3">
@@ -392,7 +392,7 @@ export const TrackRecordPage: React.FC = () => {
               {selectedModalProject.category}
             </span>
 
-            <h3 className="font-serif text-[24px] sm:text-[28px] font-bold text-[#9e7a32] mb-1.5">
+            <h3 className="font-serif text-[24px] sm:text-[28px] font-bold text-[#7c5816] mb-1.5">
               {getProjectTitle(selectedModalProject)}
             </h3>
             {getProjectSubtitle(selectedModalProject) && (
@@ -411,7 +411,7 @@ export const TrackRecordPage: React.FC = () => {
             )}
 
             {/* Highlights Section Title */}
-            <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#9e7a32] uppercase mb-3">
+            <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#7c5816] uppercase mb-3">
               {isKo 
                 ? (selectedModalProject.highlightsTitleKo || '주요 수행 실적 및 핵심 성과')
                 : (selectedModalProject.highlightsTitleEn || 'KEY HIGHLIGHTS & EXECUTION')}

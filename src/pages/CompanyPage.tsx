@@ -107,7 +107,7 @@ Thank you.`;
     <div className="flex flex-col bg-[#f7f5f0] text-[#141413] min-h-screen selection:bg-[#c6a35b] selection:text-white">
       {/* 1. TOP HEADER BANNER (Matching Reference Image) */}
       <PageHeader
-        title={isKo ? "제니안스 그룹 소개" : "ABOUT XENIANS"}
+        title={isKo ? "제니안스 소개" : "ABOUT XENIANS"}
         breadcrumb={isKo ? "ABOUT / 회사소개" : "ABOUT"}
         imageSrc="/images/header-about.jpg"
         imageAlt="About Xenians"
@@ -121,12 +121,12 @@ Thank you.`;
           <div className="lg:col-span-3 lg:sticky lg:top-32 pr-0 lg:pr-4">
             <div className="mb-5 pb-3.5 border-b border-black/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-2xs shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#7c5816] shadow-2xs shrink-0" />
                 <span className="font-sans text-[13.5px] sm:text-[14.5px] font-bold text-[#1e3a8a] tracking-tight">
                   {isKo ? '제니안스 소개' : 'ABOUT XENIANS'}
                 </span>
               </div>
-              <span className="font-mono text-[11px] font-bold text-[#9e7a32] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
+              <span className="font-mono text-[11px] font-bold text-[#7c5816] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
                 03 SECTIONS
               </span>
             </div>
@@ -169,7 +169,7 @@ Thank you.`;
                     <div className="flex items-center gap-2.5 min-w-0 relative z-10 pl-0.5">
                       <span
                         className={`font-mono text-[11.5px] font-bold shrink-0 transition-colors duration-200 ${
-                          isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
+                          isActive || isHovered ? 'text-[#7c5816]' : 'text-[#888888] group-hover:text-[#7c5816]'
                         }`}
                       >
                         0{idx + 1}
@@ -188,8 +188,8 @@ Thank you.`;
                     <div className="relative z-10 flex items-center pl-1.5 shrink-0">
                       <div className={`w-5.5 h-5.5 rounded-full flex items-center justify-center transition-all duration-300 ${
                         isActive || isHovered
-                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-2xs translate-x-0.5 scale-105' 
-                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-105 group-hover:translate-x-0.5'
+                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#7c5816] text-white shadow-2xs translate-x-0.5 scale-105' 
+                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#7c5816] group-hover:text-white group-hover:scale-105 group-hover:translate-x-0.5'
                       }`}>
                         <ChevronRight className="w-3 h-3" />
                       </div>
@@ -232,7 +232,7 @@ Thank you.`;
                 </span>
                 <div className="w-12 h-[2px] bg-[#c6a35b] mb-8" />
 
-                <h2 className="font-serif text-[24px] sm:text-[30px] md:text-[34px] text-[#9e7a32] font-medium leading-[1.35] mb-8 break-keep">
+                <h2 className="font-serif text-[24px] sm:text-[30px] md:text-[34px] text-[#7c5816] font-medium leading-[1.35] mb-8 break-keep">
                   {lang === 'ko' ? (
                     <>자산의 본질적 가치를 꿰뚫고<br />새로운 성장의 이정표를 제시합니다.</>
                   ) : (
@@ -274,8 +274,8 @@ Thank you.`;
                 <span className="font-sans text-[12px] sm:text-[13px] font-bold tracking-tight text-[#c6a35b] uppercase block mb-1.5">
                   {isKo ? '조직 체계' : 'ORGANIZATION STRUCTURE'}
                 </span>
-                <h3 className="font-sans text-[22px] sm:text-[26px] text-[#9e7a32] font-bold tracking-tight">
-                  {isKo ? '제니안스 그룹 조직 체계' : 'XENIANS Group Organization'}
+                <h3 className="font-sans text-[22px] sm:text-[26px] text-[#7c5816] font-bold tracking-tight">
+                  {isKo ? '제니안스 조직 체계' : 'XENIANS Group Organization'}
                 </h3>
                 <p className="font-sans text-[14px] text-[#555555] mt-2 font-normal">
                   {isKo 
@@ -311,15 +311,15 @@ Thank you.`;
                         {/* Division Header */}
                         <div className="flex items-start justify-between gap-3 pb-4 mb-4 border-b border-black/[0.08]">
                           <div>
-                            <span className="font-sans text-[11.5px] sm:text-[12px] font-bold text-[#a18750] tracking-normal uppercase block mb-1">
+                            <span className="font-sans text-[11.5px] sm:text-[12px] font-bold text-[#7c5816] tracking-normal uppercase block mb-1">
                               {isKo ? `사업 부문 0${dIdx + 1}` : `DIVISION 0${dIdx + 1}`}
                             </span>
-                            <h4 className="font-sans text-[18px] sm:text-[19px] font-bold text-[#9e7a32] tracking-tight">
+                            <h4 className="font-sans text-[18px] sm:text-[19px] font-bold text-[#7c5816] tracking-tight">
                               {getDivisionName(divItem, dIdx)}
                             </h4>
                           </div>
                           <div className="w-9 h-9 rounded-sm bg-black/[0.04] border border-black/[0.08] flex items-center justify-center shrink-0 text-[#141413]">
-                            <Icon className="w-4 h-4 text-[#a18750]" />
+                            <Icon className="w-4 h-4 text-[#7c5816]" />
                           </div>
                         </div>
 
@@ -362,7 +362,7 @@ Thank you.`;
                 <span className="font-sans text-[12px] sm:text-[13px] font-bold tracking-tight text-[#c6a35b] uppercase block mb-1.5">
                   {isKo ? '핵심 역량' : 'OUR STRENGTH'}
                 </span>
-                <h3 className="font-sans text-[22px] sm:text-[26px] text-[#9e7a32] font-bold tracking-tight">
+                <h3 className="font-sans text-[22px] sm:text-[26px] text-[#7c5816] font-bold tracking-tight">
                   {lang === 'ko' ? '차별화된 핵심 경쟁력' : 'Core Competencies'}
                 </h3>
               </div>
@@ -378,10 +378,10 @@ Thank you.`;
                   return (
                     <div key={idx} className="pt-6 pb-6 px-4 border-t-2 border-black/[0.12] hover:border-t-[3px] hover:border-[#c6a35b] transition-all duration-300 hover:bg-[#ffffff] hover:shadow-[0_12px_28px_rgba(198,163,91,0.14)] hover:-translate-y-1 rounded-sm">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="font-mono text-[12px] text-[#a18750] font-bold">{item.num}</span>
+                        <span className="font-mono text-[12px] text-[#7c5816] font-bold">{item.num}</span>
                         <Icon className="w-5 h-5 text-[#141413]" />
                       </div>
-                      <h4 className="font-serif text-[16px] font-bold text-[#9e7a32] mb-2">
+                      <h4 className="font-serif text-[16px] font-bold text-[#7c5816] mb-2">
                         {lang === 'ko' ? item.titleKo : item.title}
                       </h4>
                       <p className="text-[12.5px] text-[#666666] leading-relaxed">
