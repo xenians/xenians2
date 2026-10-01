@@ -119,12 +119,15 @@ Thank you.`;
           
           {/* Left Vertical Sidebar / Table of Contents (Unboxed, Direct on Background with Refined Hover Animation) */}
           <div className="lg:col-span-3 lg:sticky lg:top-32 pr-0 lg:pr-4">
-            <div className="mb-6 pb-4 border-b border-black/[0.08] flex items-center justify-between">
-              <span className="text-[11px] font-mono tracking-[0.25em] text-[#1e40af] font-bold uppercase">
-                {isKo ? '제니안스 소개' : 'ABOUT XENIANS'}
-              </span>
-              <span className="text-[11px] font-mono text-[#666666] font-semibold">
-                {isKo ? '03개 섹션' : '03 SECTIONS'}
+            <div className="mb-5 pb-3.5 border-b border-black/10 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-2xs shrink-0" />
+                <span className="font-sans text-[13.5px] sm:text-[14.5px] font-bold text-[#1e3a8a] tracking-tight">
+                  {isKo ? '제니안스 소개' : 'ABOUT XENIANS'}
+                </span>
+              </div>
+              <span className="font-mono text-[11px] font-bold text-[#9e7a32] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
+                03 SECTIONS
               </span>
             </div>
             
@@ -152,27 +155,27 @@ Thank you.`;
                         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
-                    className={`group cursor-pointer relative w-full text-left py-3.5 px-4 rounded-xs transition-all duration-300 flex items-center justify-between border-t-0 border-r-0 border-l-[3px] border-b-[2.5px] overflow-hidden ${
+                    className={`group cursor-pointer relative w-full text-left py-2.5 px-3.5 rounded-xs transition-all duration-300 flex items-center justify-between border-t-0 border-r-0 border-l-[3px] border-b-[2px] overflow-hidden ${
                       isDimmed 
                         ? 'opacity-30 blur-[0.6px] scale-[0.985] bg-transparent border-l-transparent border-b-transparent' 
                         : isHovered || isActive
-                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-4px_8px_22px_rgba(198,163,91,0.25),0_10px_24px_rgba(0,0,0,0.06)] font-bold -translate-y-1 translate-x-1.5 z-10'
-                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-1 hover:translate-x-1.5 hover:shadow-[-4px_8px_22px_rgba(198,163,91,0.25)]'
+                          ? 'bg-gradient-to-br from-white via-[#faf6ed] to-[#f4e8cc] text-[#111111] border-l-[#c6a35b] border-b-[#9e7a32] shadow-[-3px_6px_16px_rgba(198,163,91,0.2),0_4px_12px_rgba(0,0,0,0.04)] font-bold -translate-y-0.5 translate-x-1 z-10'
+                          : 'bg-transparent text-[#444444] border-l-transparent border-b-transparent hover:bg-gradient-to-br hover:from-white hover:via-[#faf6ed] hover:to-[#f4e8cc] hover:text-[#111111] hover:border-l-[#c6a35b] hover:border-b-[#9e7a32] hover:-translate-y-0.5 hover:translate-x-1 hover:shadow-[-3px_6px_16px_rgba(198,163,91,0.2)]'
                     }`}
                   >
                     {/* Subtle Gold Shimmer Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#c6a35b]/[0.12] via-transparent to-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                    <div className="flex items-center gap-3.5 min-w-0 relative z-10 pl-1">
+                    <div className="flex items-center gap-2.5 min-w-0 relative z-10 pl-0.5">
                       <span
-                        className={`font-mono text-[12.5px] font-bold shrink-0 transition-colors duration-200 ${
+                        className={`font-mono text-[11.5px] font-bold shrink-0 transition-colors duration-200 ${
                           isActive || isHovered ? 'text-[#9e7a32]' : 'text-[#888888] group-hover:text-[#9e7a32]'
                         }`}
                       >
                         0{idx + 1}
                       </span>
                       <span
-                        className={`font-sans text-[14.5px] sm:text-[15px] tracking-tight truncate transition-colors duration-200 ${
+                        className={`font-sans text-[13.5px] sm:text-[14px] tracking-tight truncate transition-colors duration-200 ${
                           isActive || isHovered
                             ? 'font-bold text-[#111111]'
                             : 'font-medium text-[#333333] group-hover:text-[#111111] group-hover:font-bold'
@@ -182,13 +185,13 @@ Thank you.`;
                       </span>
                     </div>
 
-                    <div className="relative z-10 flex items-center pl-2 shrink-0">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    <div className="relative z-10 flex items-center pl-1.5 shrink-0">
+                      <div className={`w-5.5 h-5.5 rounded-full flex items-center justify-center transition-all duration-300 ${
                         isActive || isHovered
-                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-xs translate-x-0.5 scale-110' 
-                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-110 group-hover:translate-x-0.5'
+                          ? 'bg-gradient-to-br from-[#dfbe7a] via-[#c6a35b] to-[#9e7a32] text-white shadow-2xs translate-x-0.5 scale-105' 
+                          : 'bg-black/[0.04] text-[#888888] group-hover:bg-gradient-to-br group-hover:from-[#dfbe7a] group-hover:via-[#c6a35b] group-hover:to-[#9e7a32] group-hover:text-white group-hover:scale-105 group-hover:translate-x-0.5'
                       }`}>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <ChevronRight className="w-3 h-3" />
                       </div>
                     </div>
                   </button>
@@ -198,7 +201,7 @@ Thank you.`;
 
             <div className="mt-8 pt-6 border-t border-black/[0.08] font-sans text-[13px] text-[#666666] leading-relaxed break-keep">
               <p className="font-semibold text-[#141413] mb-1 font-mono text-[12px]">XENIANS INC.</p>
-              <p>{lang === 'ko' ? '글로벌 부동산 투자 및 종합 자산 자문 그룹' : 'Real Estate Investment & Advisory Group'}</p>
+              <p>{lang === 'ko' ? '글로벌 부동산 자문 및 종합 자산 관리 그룹' : 'Real Estate Advisory & Management Group'}</p>
             </div>
           </div>
 
@@ -268,13 +271,13 @@ Thank you.`;
             {/* ORGANIZATION STRUCTURE SECTION (Unboxed, Sitting Directly on Page Background) */}
             <div id="org" className="pb-16 border-b border-black/[0.08] scroll-mt-32">
               <div className="mb-10">
-                <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#c6a35b] font-bold uppercase block mb-2">
+                <span className="font-sans text-[12px] sm:text-[13px] font-bold tracking-tight text-[#c6a35b] uppercase block mb-1.5">
                   {isKo ? '조직 체계' : 'ORGANIZATION STRUCTURE'}
                 </span>
-                <h3 className="font-serif text-[22px] sm:text-[26px] text-[#9e7a32] font-medium">
+                <h3 className="font-sans text-[22px] sm:text-[26px] text-[#9e7a32] font-bold tracking-tight">
                   {isKo ? '제니안스 그룹 조직 체계' : 'XENIANS Group Organization'}
                 </h3>
-                <p className="text-[14px] text-[#666666] mt-2">
+                <p className="font-sans text-[14px] text-[#555555] mt-2 font-normal">
                   {isKo 
                     ? '전문성과 유기적인 협업을 바탕으로 최고의 시너지를 창출하는 4대 핵심 사업 부문' 
                     : '4 Core Divisions maximizing strategic synergies through deep expertise and agile collaboration'}
@@ -284,10 +287,10 @@ Thank you.`;
               {/* Top Executive Node */}
               <div className="flex flex-col items-center mb-10">
                 <div className="w-full max-w-sm py-4 px-6 bg-[#141413] text-white rounded-sm text-center shadow-sm border border-black/[0.15]">
-                  <span className="font-mono text-[10.5px] tracking-[0.25em] text-[#c6a35b] uppercase font-bold block mb-0.5">
+                  <span className="font-sans text-[11px] sm:text-[11.5px] font-bold tracking-tight text-[#c6a35b] uppercase block mb-0.5">
                     {isKo ? '총괄 경영진' : 'EXECUTIVE LEADERSHIP'}
                   </span>
-                  <span className="font-serif text-[17px] font-medium tracking-wider text-[#dfbe7a]">
+                  <span className="font-sans text-[17px] font-bold tracking-normal text-[#dfbe7a]">
                     {isKo ? '대표이사 / CEO' : 'Chief Executive Officer'}
                   </span>
                 </div>
@@ -308,10 +311,10 @@ Thank you.`;
                         {/* Division Header */}
                         <div className="flex items-start justify-between gap-3 pb-4 mb-4 border-b border-black/[0.08]">
                           <div>
-                            <span className="font-mono text-[10px] tracking-widest text-[#a18750] font-bold uppercase block mb-1">
+                            <span className="font-sans text-[11.5px] sm:text-[12px] font-bold text-[#a18750] tracking-normal uppercase block mb-1">
                               {isKo ? `사업 부문 0${dIdx + 1}` : `DIVISION 0${dIdx + 1}`}
                             </span>
-                            <h4 className="font-serif text-[18px] sm:text-[19px] font-bold text-[#9e7a32]">
+                            <h4 className="font-sans text-[18px] sm:text-[19px] font-bold text-[#9e7a32] tracking-tight">
                               {getDivisionName(divItem, dIdx)}
                             </h4>
                           </div>
@@ -321,13 +324,13 @@ Thank you.`;
                         </div>
 
                         {/* Division Role Summary */}
-                        <p className="text-[13px] text-[#555555] leading-relaxed mb-5">
+                        <p className="font-sans text-[13px] text-[#555555] leading-relaxed mb-5 font-normal">
                           {getDivisionRole(divItem, dIdx)}
                         </p>
 
                         {/* Teams & Sub-roles list */}
                         <div className="space-y-2.5">
-                          <span className="font-mono text-[10px] tracking-[0.2em] text-[#141413] uppercase font-bold block">
+                          <span className="font-sans text-[11.5px] sm:text-[12px] font-bold text-[#141413] tracking-tight block">
                             {isKo ? '주요 팀 및 핵심 역할' : 'KEY TEAMS & ROLES'}
                           </span>
                           <div className="space-y-2">
@@ -336,10 +339,10 @@ Thank you.`;
                                 key={tIdx} 
                                 className="p-2.5 bg-black/[0.025] rounded-sm border-l-2 border-[#c6a35b]/40 text-[12.5px]"
                               >
-                                <div className="font-semibold text-[#141413]">
+                                <div className="font-sans font-bold text-[#141413]">
                                   {getTeamName(team, dIdx, tIdx)}
                                 </div>
-                                <div className="text-[11.5px] text-[#666666] mt-0.5 leading-snug">
+                                <div className="font-sans text-[11.5px] text-[#666666] mt-0.5 leading-snug font-normal">
                                   {getTeamRole(team, dIdx, tIdx)}
                                 </div>
                               </div>
@@ -356,10 +359,10 @@ Thank you.`;
             {/* OUR STRENGTH SECTION (Unboxed with Enhanced Hover Animation Color) */}
             <div id="overview" className="scroll-mt-32">
               <div className="mb-8">
-                <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#c6a35b] font-bold uppercase block mb-2">
+                <span className="font-sans text-[12px] sm:text-[13px] font-bold tracking-tight text-[#c6a35b] uppercase block mb-1.5">
                   {isKo ? '핵심 역량' : 'OUR STRENGTH'}
                 </span>
-                <h3 className="font-serif text-[22px] sm:text-[26px] text-[#9e7a32] font-medium">
+                <h3 className="font-sans text-[22px] sm:text-[26px] text-[#9e7a32] font-bold tracking-tight">
                   {lang === 'ko' ? '차별화된 핵심 경쟁력' : 'Core Competencies'}
                 </h3>
               </div>

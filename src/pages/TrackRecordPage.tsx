@@ -139,12 +139,15 @@ export const TrackRecordPage: React.FC = () => {
             
             {/* Left Column: Numbered Project List & Section Overview */}
             <div className="lg:col-span-3 pr-0 lg:pr-3">
-              <div className="mb-4 pb-3.5 border-b border-black/[0.08] flex items-center justify-between">
-                <span className="text-[11px] font-mono tracking-[0.25em] text-[#1e40af] font-bold uppercase">
-                  {listTitle}
-                </span>
-                <span className="text-[11px] font-mono text-[#666666] font-semibold">
-                  {String(projects.length).padStart(2, '0')} {isKo ? 'PROJECTS' : 'PROJECTS'}
+              <div className="mb-5 pb-3.5 border-b border-black/10 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-2xs shrink-0" />
+                  <span className="font-sans text-[13.5px] sm:text-[14.5px] font-bold text-[#1e3a8a] tracking-tight">
+                    {listTitle}
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] font-bold text-[#9e7a32] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
+                  {String(projects.length).padStart(2, '0')} PROJECTS
                 </span>
               </div>
 
@@ -332,7 +335,7 @@ export const TrackRecordPage: React.FC = () => {
 
           {/* 3. BOTTOM THUMBNAILS ROW */}
           <div className="mt-12 pt-8 border-t border-black/[0.08]">
-            <span className="text-[10.5px] font-mono tracking-[0.3em] text-[#a18750] font-bold uppercase block mb-4">
+            <span className="font-sans text-[13px] sm:text-[14px] font-bold text-[#a18750] tracking-tight block mb-3.5">
               {galleryTitle}
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2.5 sm:gap-3">

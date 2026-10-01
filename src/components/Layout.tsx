@@ -90,7 +90,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   const businessDivisions = [
     { key: 'mna', labelKo: '01 M&A 자문', labelEn: '01 M&A Advisory', subKo: '가치를 중심으로 설계하는 전략적 거래', subEn: 'Strategic Transactions & Valuation', icon: Handshake, path: '/business/mna' },
-    { key: 'development', labelKo: '02 시행 · 개발', labelEn: '02 Development & PM', subKo: '자본 구조에서 프로젝트 완성까지', subEn: 'Master Planning & PF Structuring', icon: Building2, path: '/business/development' },
+    { key: 'development', labelKo: '02 시행 · 개발', labelEn: '02 Development & PM', subKo: '자본 구조에서 프로젝트 완성까지', subEn: 'Master Planning & Project Management', icon: Building2, path: '/business/development' },
     { key: 'sales', labelKo: '03 분양대행', labelEn: '03 Strategic Sales', subKo: '시행 관점의 수지분석 및 완판 전략', subEn: 'Data-driven Presale Execution', icon: TrendingUp, path: '/business/sales' },
     { key: 'operation', labelKo: '04 위탁운영', labelEn: '04 Hospitality Ops', subKo: '호텔·리조트·상업시설 수익 극대화', subEn: 'Turnaround & Revenue Management', icon: UserCheck, path: '/business/operation' },
     { key: 'fm', labelKo: '05 시설관리', labelEn: '05 Facility Management', subKo: '위탁운영 연계형 스마트 FM & LCC', subEn: 'Smart FM & LCC Optimization', icon: Settings, path: '/business/fm' },
@@ -129,8 +129,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             >
               XENIANS GROUP
             </span>
-            <span className="font-mono text-[7px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.14em] sm:tracking-[0.25em] text-[#a18750] font-bold uppercase mt-1 sm:mt-1.5 leading-none truncate">
-              REAL ESTATE BUSINESS PLATFORM
+            <span className="font-mono text-[7px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.05em] sm:tracking-[0.12em] text-[#a18750] font-bold uppercase mt-1 sm:mt-1.5 leading-none truncate">
+              Real Estate Advisory & Management Group
             </span>
           </div>
         </Link>
@@ -506,10 +506,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 </div>
               </Link>
 
-              {/* Slogan under the bottom left logo */}
-              <div className="mt-3.5 pl-0.5">
-                <p className="font-sans text-[12px] sm:text-[13px] tracking-[0.14em] text-[#dfbe7a] font-medium select-none opacity-95">
+              {/* Slogan & Group Title under the bottom left logo */}
+              <div className="mt-3.5 pl-0.5 space-y-1">
+                <p className="font-sans text-[12px] sm:text-[13px] tracking-[0.14em] text-[#dfbe7a] font-semibold select-none opacity-95">
                   Value-Driven, Result-Oriented
+                </p>
+                <p className="font-mono text-[9px] sm:text-[10px] md:text-[10.5px] tracking-[0.05em] sm:tracking-[0.12em] text-[#dfbe7a]/90 font-bold uppercase select-none">
+                  Real Estate Advisory & Management Group
                 </p>
               </div>
             </div>
@@ -559,7 +562,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 </li>
                 <li>
                   <Link to="/business/development" onClick={handleNavClick} className="hover:text-[#c6a35b] transition-colors">
-                    Development & PF
+                    Development & PM
                   </Link>
                 </li>
                 <li>

@@ -189,10 +189,10 @@ export const BusinessPage: React.FC = () => {
     {
       id: 'development',
       tabNumber: '02',
-      tabLabel: 'DEVELOPMENT & PF',
-      tabLabelKo: '시행 기획 · 개발 및 PF',
-      title: 'Development & PF',
-      titleKo: '시행 기획, 개발 및 프로젝트 금융 (Development & PF)',
+      tabLabel: 'DEVELOPMENT & PM',
+      tabLabelKo: '시행 기획 · 개발 및 PM',
+      title: 'Development & PM',
+      titleKo: '시행 기획, 개발 및 프로젝트 매니지먼트 (Development & PM)',
       descKo: '사업 기획부터 금융 구조화, 인허가, 개발 PM, 시공 관리 및 Exit까지 통합 관리합니다. 시장 변동성에 흔들리지 않는 자본 구조와 치밀한 리스크 헷징으로 개발 사업의 성공을 견인합니다.',
       descEn: 'Integrated development management across site acquisition, zoning approvals, PF syndication, construction PM, and exit liquidation.',
       imageSrc: '/images/business-development-tower.jpg',
@@ -711,12 +711,15 @@ export const BusinessPage: React.FC = () => {
           
           {/* Left Vertical Division List (Unified Luxury Sidebar with Gold Hover & Spotlight Dimming) */}
           <div className="lg:col-span-4 lg:sticky lg:top-32 pr-0 lg:pr-4">
-            <div className="mb-6 pb-4 border-b border-black/[0.08] flex items-center justify-between">
-              <span className="text-[11px] font-mono tracking-[0.25em] text-[#c6a35b] font-bold uppercase">
-                {lang === 'ko' ? '핵심 사업 영역' : 'BUSINESS SECTORS'}
-              </span>
-              <span className="text-[11px] font-mono text-[#666666] font-semibold">
-                0{divisions.length} {lang === 'ko' ? '개 부문' : 'DIVISIONS'}
+            <div className="mb-5 pb-3.5 border-b border-black/10 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-[#dfbe7a] to-[#9e7a32] shadow-2xs shrink-0" />
+                <span className="font-sans text-[13.5px] sm:text-[14.5px] font-bold text-[#1e3a8a] tracking-tight">
+                  {lang === 'ko' ? '핵심 사업 영역' : 'BUSINESS SECTORS'}
+                </span>
+              </div>
+              <span className="font-mono text-[11px] font-bold text-[#9e7a32] bg-[#faf7f2] px-2.5 py-0.5 rounded-full border border-[#c6a35b]/25 shadow-2xs">
+                0{divisions.length} {lang === 'ko' ? 'DIVISIONS' : 'DIVISIONS'}
               </span>
             </div>
 
@@ -808,7 +811,7 @@ export const BusinessPage: React.FC = () => {
               <span className="text-[11px] font-mono tracking-[0.25em] text-[#a18750] font-bold uppercase block mb-2.5">
                 {current.tabNumber} / XENIANS BUSINESS DIVISION
               </span>
-              <h2 className="font-sans text-[26px] sm:text-[32px] md:text-[34px] text-[#111111] font-bold mb-4 leading-tight">
+              <h2 className="font-sans text-[26px] sm:text-[32px] md:text-[34px] font-extrabold mb-4 leading-tight bg-gradient-to-r from-[#9e7a32] via-[#c6a35b] to-[#dfbe7a] bg-clip-text text-transparent inline-block">
                 {lang === 'ko' ? current.titleKo : current.title}
               </h2>
               <p className="font-sans text-[15px] sm:text-[16px] text-[#333333] leading-[1.8] font-normal break-keep">
@@ -951,7 +954,7 @@ export const BusinessPage: React.FC = () => {
             <span className="text-[11px] font-mono tracking-[0.25em] text-[#a18750] font-bold uppercase block mb-2">
               {current.tabNumber} / {current.tabLabel} PROCESS FLOW
             </span>
-            <h3 className="font-sans text-[24px] sm:text-[28px] text-[#111111] font-bold mb-2.5">
+            <h3 className="font-sans text-[24px] sm:text-[28px] font-extrabold mb-2.5 bg-gradient-to-r from-[#9e7a32] via-[#c6a35b] to-[#dfbe7a] bg-clip-text text-transparent inline-block">
               {lang === 'ko' 
                 ? `${current.tabLabelKo} 표준 실행 프로세스` 
                 : `${current.tabLabel} Standard Execution Methodology`}
