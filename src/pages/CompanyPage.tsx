@@ -201,7 +201,7 @@ Thank you.`;
 
             <div className="mt-8 pt-6 border-t border-black/[0.08] font-sans text-[13px] text-[#666666] leading-relaxed break-keep">
               <p className="font-semibold text-[#141413] mb-1 font-mono text-[12px]">XENIANS INC.</p>
-              <p>{lang === 'ko' ? '글로벌 부동산 자문 및 종합 자산 관리 그룹' : 'Real Estate Advisory & Management Group'}</p>
+              <p>{lang === 'ko' ? '글로벌 부동산 자문 및 종합 자산 관리 그룹' : 'Strategic M&A Advisory & Management'}</p>
             </div>
           </div>
 

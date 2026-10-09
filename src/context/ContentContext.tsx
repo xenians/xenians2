@@ -185,18 +185,17 @@ function mergeSiteData(defaults: SiteData, savedRaw: string | null): SiteData {
 }
 
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Always default to English ('en') on initial page load / fresh visit
+  // Always default to English ('en') when opening the website / initial load
   const [lang, setLang] = useState<'ko' | 'en'>(() => {
     if (typeof window !== 'undefined') {
-      const explicitUserSelected = localStorage.getItem('xenians_lang_user_selected');
-      if (explicitUserSelected === 'true') {
-        const savedLang = localStorage.getItem('xenians_lang');
-        if (savedLang === 'ko' || savedLang === 'en') {
-          return savedLang;
-        }
-      }
+      try {
+        // Clear old legacy keys so opening the website always starts in English
+        localStorage.removeItem('xenians_lang_user_selected');
+        localStorage.removeItem('xenians_lang');
+        sessionStorage.removeItem('xenians_session_lang');
+      } catch (e) {}
     }
-    return 'en'; // Default is always English
+    return 'en'; // Global default is always English
   });
 
   const [dataKo, setDataKo] = useState<SiteData>(() => {
@@ -244,8 +243,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setLang(newLang);
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('xenians_session_lang', newLang);
-      localStorage.setItem('xenians_lang', newLang);
-      localStorage.setItem('xenians_lang_user_selected', 'true');
     }
   };
 

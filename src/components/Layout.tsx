@@ -130,7 +130,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               XENIANS GROUP
             </span>
             <span className="font-sans text-[7.5px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.04em] sm:tracking-[0.08em] text-[#c6a35b] font-bold uppercase mt-1 sm:mt-1.5 leading-none whitespace-nowrap">
-              Real Estate Advisory & Management Group
+              Strategic M&A Advisory & Management
             </span>
           </div>
         </Link>
@@ -509,7 +509,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                     />
                   </Link>
                   <p className="font-sans text-[7.5px] sm:text-[8.5px] md:text-[9.5px] tracking-[0.03em] sm:tracking-[0.06em] text-[#c6a35b] font-bold uppercase mt-1.5 leading-none whitespace-nowrap select-none">
-                    Real Estate Advisory & Management Group
+                    Strategic M&A Advisory & Management
                   </p>
                 </div>
               </div>
